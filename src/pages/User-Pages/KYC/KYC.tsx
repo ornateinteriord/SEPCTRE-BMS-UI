@@ -19,7 +19,6 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import PersonIcon from '@mui/icons-material/Person';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import BadgeIcon from '@mui/icons-material/Badge';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ImageIcon from '@mui/icons-material/Image';
@@ -27,6 +26,7 @@ import UserContext from '../../../context/user/userContext';
 import { LoadingComponent } from '../../../App';
 import { useSubmitKYC, useUploadKYCDocument } from '../../../api/Memeber';
 import { toast } from 'react-toastify';
+import BadgeIcon from '@mui/icons-material/Badge';
 
 interface DocumentUploadProps {
   label: string;
@@ -150,9 +150,6 @@ const KYC: React.FC = () => {
     account_number: '',
     ifsc_code: '',
     bank_name: '',
-    Pan_no: '',
-    Aadhar_no: '',
-    address: '',
   });
 
   const [documents, setDocuments] = useState({
@@ -173,9 +170,6 @@ const KYC: React.FC = () => {
         account_number: user.account_number || '',
         ifsc_code: user.ifsc_code || '',
         bank_name: user.bank_name || '',
-        Pan_no: user.Pan_no || '',
-        Aadhar_no: user.aadharcard_no || '',
-        address: user.address || '',
       });
 
       // Load existing document URLs if available
@@ -269,8 +263,8 @@ const KYC: React.FC = () => {
     }
 
     // Validate bank details
-    if (!formData.account_number || !formData.ifsc_code || !formData.bank_name || !formData.Pan_no || !formData.Aadhar_no) {
-      toast.error('Please fill all identity and bank account details');
+    if (!formData.account_number || !formData.ifsc_code || !formData.bank_name) {
+      toast.error('Please fill all bank account details');
       return;
     }
 
@@ -278,9 +272,6 @@ const KYC: React.FC = () => {
       ref_no: user.Member_id,
       bankAccount: formData.account_number,
       ifsc: formData.ifsc_code,
-      pan: formData.Pan_no,
-      aadhar_no: formData.Aadhar_no,
-      address: formData.address,
       bankName: formData.bank_name,
       panImage: documents.panImage,
       aadhaarImage: documents.aadhaarImage,
@@ -432,64 +423,6 @@ const KYC: React.FC = () => {
                   },
                 }}
               />
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    label="PAN Number"
-                    name="Pan_no"
-                    value={formData.Pan_no}
-                    onChange={handleInputChange}
-                    fullWidth
-                    variant="outlined"
-                    placeholder="Enter PAN number"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <BadgeIcon sx={{ color: '#0a2558' }} />
-                        </InputAdornment>
-                      ),
-                    }}
-                    sx={{
-                      '& .MuiOutlinedInput-root': {
-                        '&:hover fieldset': {
-                          borderColor: '#0a2558',
-                        },
-                        '&.Mui-focused fieldset': {
-                          borderColor: '#0a2558',
-                        },
-                      },
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    label="Aadhar Number"
-                    name="Aadhar_no"
-                    value={formData.Aadhar_no}
-                    onChange={handleInputChange}
-                    fullWidth
-                    variant="outlined"
-                    placeholder="Enter Aadhar number"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <PersonIcon sx={{ color: '#0a2558' }} />
-                        </InputAdornment>
-                      ),
-                    }}
-                    sx={{
-                      '& .MuiOutlinedInput-root': {
-                        '&:hover fieldset': {
-                          borderColor: '#0a2558',
-                        },
-                        '&.Mui-focused fieldset': {
-                          borderColor: '#0a2558',
-                        },
-                      },
-                    }}
-                  />
-                </Grid>
-              </Grid>
             </form>
           </AccordionDetails>
         </Accordion>

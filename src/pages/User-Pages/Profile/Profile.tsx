@@ -22,6 +22,9 @@ import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import WcIcon from "@mui/icons-material/Wc";
+import BadgeIcon from "@mui/icons-material/Badge";
+import FingerprintIcon from "@mui/icons-material/Fingerprint";
+import HomeIcon from "@mui/icons-material/Home";
 import UserContext from "../../../context/user/userContext";
 import { useUpdateMember, useImageKitUpload } from "../../../api/Memeber";
 import { LoadingComponent } from "../../../App";
@@ -41,6 +44,9 @@ const Profile: React.FC = () => {
     Father_name: "",
     Nominee_name: "",
     Nominee_Relation: "",
+    Pan_no: "",
+    aadharcard_no: "",
+    address: "",
   });
   const [loading, setLoading] = useState(false);
 
@@ -60,6 +66,9 @@ const Profile: React.FC = () => {
         Father_name: user.Father_name ?? "",
         Nominee_name: user.Nominee_name ?? "",
         Nominee_Relation: user.Nominee_Relation ?? "",
+        Pan_no: user.Pan_no ?? "",
+        aadharcard_no: user.aadharcard_no ?? "",
+        address: user.address ?? "",
       });
     }
   }, [user]);
@@ -209,6 +218,56 @@ const Profile: React.FC = () => {
                   startAdornment: (
                     <InputAdornment position="start">
                       <PhoneIcon sx={{ color: "#0a2558" }} />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                label="PAN Number"
+                name="Pan_no"
+                value={formData.Pan_no}
+                onChange={handleInputChange}
+                fullWidth
+                variant="outlined"
+                placeholder="Enter PAN number"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <BadgeIcon sx={{ color: "#0a2558" }} />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                label="Aadhaar Number"
+                name="aadharcard_no"
+                value={formData.aadharcard_no}
+                onChange={handleInputChange}
+                fullWidth
+                variant="outlined"
+                placeholder="Enter Aadhaar number"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <FingerprintIcon sx={{ color: "#0a2558" }} />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                label="Address"
+                name="address"
+                value={formData.address}
+                onChange={handleInputChange}
+                fullWidth
+                multiline
+                rows={2}
+                variant="outlined"
+                placeholder="Enter your full address"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <HomeIcon sx={{ color: "#0a2558" }} />
                     </InputAdornment>
                   ),
                 }}
