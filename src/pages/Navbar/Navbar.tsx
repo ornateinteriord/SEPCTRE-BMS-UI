@@ -5,6 +5,8 @@ import {
   Menu as MenuIcon,
   Settings,
   User,
+  Headphones,
+  Bell,
 } from "lucide-react";
 import "./navbar.scss";
 import {
@@ -65,9 +67,9 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
         position="fixed"
         elevation={0}
         sx={{
-          background: "#081b42", // Darkened version of #0D2B68
-          borderBottom: '1px solid rgba(255,255,255,0.1)',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+          background: "#08101f", // Matches the dark dashboard background
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
           zIndex: (theme) => theme.zIndex.drawer + 1
         }}
       >
@@ -78,74 +80,135 @@ const Navbar = ({ shouldHide, onToggleSidebar }: NavbarProps) => {
           justifyContent: 'space-between',
           alignItems: 'center'
         }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            {isAdmin && onToggleSidebar && (
-              <IconButton
-                onClick={onToggleSidebar}
-                sx={{ color: "white", mr: 1, display: { xs: 'flex', md: 'flex' } }}
-              >
-                <MenuIcon size={24} />
-              </IconButton>
-            )}
-            <Typography
-              variant="h4"
-              onClick={() => navigate("/")}
-              sx={{
-                fontWeight: 950,
-                fontSize: { xs: '1.4rem', md: '1.85rem' },
-                cursor: "pointer",
-                letterSpacing: '1.5px',
-                color: 'white',
-                textShadow: '0 2px 4px rgba(0,0,0,0.2)'
-              }}
-            >
-              BMS
-            </Typography>
-          </Box>
-
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, md: 2 } }}>
-            {isLoggedIn && (
+          {isLoggedIn && userRole === "USER" ? (
+            // USER mobile-app style layout
+            <>
               <Box 
                 onClick={handleMenuOpen} 
                 sx={{ 
                   cursor: 'pointer', 
                   display: 'flex', 
                   alignItems: 'center', 
-                  gap: 1,
+                  gap: 1.5,
                   padding: '4px 8px',
                   borderRadius: '12px',
                   transition: 'background 0.2s',
                   '&:hover': {
-                    bgcolor: 'rgba(255,255,255,0.1)'
+                    bgcolor: 'rgba(255,255,255,0.08)'
                   }
                 }}
               >
                 <Avatar
                   sx={{
-                    width: { xs: 32, md: 38 },
-                    height: { xs: 32, md: 38 },
-                    bgcolor: '#FFC000', 
-                    color: '#0a2558',
+                    width: { xs: 36, md: 40 },
+                    height: { xs: 36, md: 40 },
+                    bgcolor: '#00e676', // Neon green profile circular background
+                    color: '#ffffff',
                     fontWeight: 900,
-                    fontSize: { xs: '0.85rem', md: '1rem' },
-                    border: '2px solid rgba(255,255,255,0.4)',
+                    fontSize: { xs: '0.95rem', md: '1.1rem' },
                     boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
                   }}
                 >
                   {memberDetails?.Name?.charAt(0).toUpperCase() || 'U'}
                 </Avatar>
-                <Box sx={{ display: { xs: 'none', sm: 'block' }, textAlign: 'left' }}>
-                  <Typography variant="body2" sx={{ color: 'white', fontWeight: 800, lineHeight: 1.1 }}>
+                <Box sx={{ textAlign: 'left' }}>
+                  <Typography variant="body2" sx={{ color: 'white', fontWeight: 800, lineHeight: 1.2, fontSize: { xs: '0.85rem', md: '0.95rem' } }}>
                     {memberDetails?.Name || "Member"}
                   </Typography>
-                  <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 600, fontSize: '0.65rem' }}>
-                    {memberDetails?.Member_id || ""}
+                  <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 600, fontSize: { xs: '0.65rem', md: '0.75rem' } }}>
+                    ID: {memberDetails?.Member_id || ""}
                   </Typography>
                 </Box>
-                <ChevronDown size={18} color="white" style={{ opacity: 0.8 }} />
               </Box>
-            )}
-          </Box>
+
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <IconButton
+                  onClick={() => navigate('/user/support-chat')}
+                  sx={{ color: "white", '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' } }}
+                >
+                  <Headphones size={22} />
+                </IconButton>
+                <IconButton
+                  onClick={() => navigate('/user/mailbox')}
+                  sx={{ color: "white", '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' } }}
+                >
+                  <Bell size={22} />
+                </IconButton>
+              </Box>
+            </>
+          ) : (
+            // Default Admin/Agent/Admin01/Public layout
+            <>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                {isAdmin && onToggleSidebar && (
+                  <IconButton
+                    onClick={onToggleSidebar}
+                    sx={{ color: "white", mr: 1, display: { xs: 'flex', md: 'flex' } }}
+                  >
+                    <MenuIcon size={24} />
+                  </IconButton>
+                )}
+                <Typography
+                  variant="h4"
+                  onClick={() => navigate("/")}
+                  sx={{
+                    fontWeight: 950,
+                    fontSize: { xs: '1.4rem', md: '1.85rem' },
+                    cursor: "pointer",
+                    letterSpacing: '1.5px',
+                    color: 'white',
+                    textShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                  }}
+                >
+                  BMS
+                </Typography>
+              </Box>
+
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, md: 2 } }}>
+                {isLoggedIn && (
+                  <Box 
+                    onClick={handleMenuOpen} 
+                    sx={{ 
+                      cursor: 'pointer', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      gap: 1,
+                      padding: '4px 8px',
+                      borderRadius: '12px',
+                      transition: 'background 0.2s',
+                      '&:hover': {
+                        bgcolor: 'rgba(255,255,255,0.1)'
+                      }
+                    }}
+                  >
+                    <Avatar
+                      sx={{
+                        width: { xs: 32, md: 38 },
+                        height: { xs: 32, md: 38 },
+                        bgcolor: '#FFC000', 
+                        color: '#0a2558',
+                        fontWeight: 900,
+                        fontSize: { xs: '0.85rem', md: '1rem' },
+                        border: '2px solid rgba(255,255,255,0.4)',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                      }}
+                    >
+                      {memberDetails?.Name?.charAt(0).toUpperCase() || 'U'}
+                    </Avatar>
+                    <Box sx={{ display: { xs: 'none', sm: 'block' }, textAlign: 'left' }}>
+                      <Typography variant="body2" sx={{ color: 'white', fontWeight: 800, lineHeight: 1.1 }}>
+                        {memberDetails?.Name || "Member"}
+                      </Typography>
+                      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', fontWeight: 600, fontSize: '0.65rem' }}>
+                        {memberDetails?.Member_id || ""}
+                      </Typography>
+                    </Box>
+                    <ChevronDown size={18} color="white" style={{ opacity: 0.8 }} />
+                  </Box>
+                )}
+              </Box>
+            </>
+          )}
         </Toolbar>
 
         {/* Dropdown Menu */}

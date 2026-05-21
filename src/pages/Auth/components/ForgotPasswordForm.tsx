@@ -84,12 +84,12 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
         startIcon={<ArrowBackIcon />}
         onClick={onBackToLogin}
         sx={{
-          color: "#64748b",
+          color: "rgba(255, 255, 255, 0.6)",
           mb: 2,
           textTransform: "none",
           fontWeight: 600,
           background: "transparent",
-          "&:hover": { color: "#0a2558", backgroundColor: "rgba(0,0,0,0.05)" }
+          "&:hover": { color: "#00e676", backgroundColor: "rgba(255,255,255,0.05)" }
         }}
       >
         Back to Login
@@ -99,7 +99,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
         component="h1"
         variant="h5"
         sx={{
-          color: "#0a2558",
+          color: "#ffffff",
           fontWeight: 800,
           textAlign: "center",
           mb: 1,
@@ -110,7 +110,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
       </Typography>
       <Typography
         variant="body2"
-        sx={{ color: "#64748b", textAlign: "center", mb: 3, fontWeight: 500 }}
+        sx={{ color: "rgba(255, 255, 255, 0.6)", textAlign: "center", mb: 3, fontWeight: 500 }}
       >
         {step === 1 && "Enter your registered email to receive an OTP"}
         {step === 2 && "Enter the 6-digit OTP sent to your email"}
@@ -120,7 +120,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
       <Box
         component="form"
         onSubmit={handleSubmit}
-        sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+        sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}
       >
         {step >= 1 && (
           <TextField
@@ -137,20 +137,35 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <EmailIcon sx={{ color: "#94a3b8" }} />
+                  <EmailIcon sx={{ color: "rgba(255, 255, 255, 0.5)" }} />
                 </InputAdornment>
               ),
             }}
             sx={{
               "& .MuiOutlinedInput-root": {
-                borderRadius: "8px",
+                color: "#ffffff",
+                bgcolor: "rgba(255, 255, 255, 0.02)",
+                borderRadius: "12px",
+                "& fieldset": {
+                  borderColor: "rgba(255, 255, 255, 0.12)",
+                },
+                "&:hover fieldset": {
+                  borderColor: "rgba(255, 255, 255, 0.25)",
+                },
                 "&.Mui-focused fieldset": {
-                  borderColor: "#0a2558",
+                  borderColor: "#00e676",
                   borderWidth: "2px"
                 },
               },
+              "& .MuiInputLabel-root": {
+                color: "rgba(255, 255, 255, 0.6)",
+              },
               "& .MuiInputLabel-root.Mui-focused": {
-                color: "#0a2558",
+                color: "#00e676",
+              },
+              "& .MuiOutlinedInput-input::placeholder": {
+                color: "rgba(255, 255, 255, 0.4)",
+                opacity: 1,
               }
             }}
           />
@@ -168,9 +183,17 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
                 sx: {
                   "& .MuiOutlinedInput-root": {
                     height: "50px",
-                    borderRadius: "8px",
+                    color: "#ffffff",
+                    bgcolor: "rgba(255, 255, 255, 0.02)",
+                    borderRadius: "12px",
+                    "& fieldset": {
+                      borderColor: "rgba(255, 255, 255, 0.12)",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "rgba(255, 255, 255, 0.25)",
+                    },
                     "&.Mui-focused fieldset": {
-                      borderColor: "#0a2558",
+                      borderColor: "#00e676",
                       borderWidth: "2px"
                     },
                   },
@@ -197,20 +220,35 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <LockIcon sx={{ color: "#94a3b8" }} />
+                    <LockIcon sx={{ color: "rgba(255, 255, 255, 0.5)" }} />
                   </InputAdornment>
                 ),
               }}
               sx={{
                 "& .MuiOutlinedInput-root": {
-                  borderRadius: "8px",
+                  color: "#ffffff",
+                  bgcolor: "rgba(255, 255, 255, 0.02)",
+                  borderRadius: "12px",
+                  "& fieldset": {
+                    borderColor: "rgba(255, 255, 255, 0.12)",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "rgba(255, 255, 255, 0.25)",
+                  },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#0a2558",
+                    borderColor: "#00e676",
                     borderWidth: "2px"
                   },
                 },
+                "& .MuiInputLabel-root": {
+                  color: "rgba(255, 255, 255, 0.6)",
+                },
                 "& .MuiInputLabel-root.Mui-focused": {
-                  color: "#0a2558",
+                  color: "#00e676",
+                },
+                "& .MuiOutlinedInput-input::placeholder": {
+                  color: "rgba(255, 255, 255, 0.4)",
+                  opacity: 1,
                 }
               }}
             />
@@ -232,20 +270,35 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <LockIcon sx={{ color: "#94a3b8" }} />
+                    <LockIcon sx={{ color: "rgba(255, 255, 255, 0.5)" }} />
                   </InputAdornment>
                 ),
               }}
               sx={{
                 "& .MuiOutlinedInput-root": {
-                  borderRadius: "8px",
+                  color: "#ffffff",
+                  bgcolor: "rgba(255, 255, 255, 0.02)",
+                  borderRadius: "12px",
+                  "& fieldset": {
+                    borderColor: "rgba(255, 255, 255, 0.12)",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "rgba(255, 255, 255, 0.25)",
+                  },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#0a2558",
+                    borderColor: "#00e676",
                     borderWidth: "2px"
                   },
                 },
+                "& .MuiInputLabel-root": {
+                  color: "rgba(255, 255, 255, 0.6)",
+                },
                 "& .MuiInputLabel-root.Mui-focused": {
-                  color: "#0a2558",
+                  color: "#00e676",
+                },
+                "& .MuiOutlinedInput-input::placeholder": {
+                  color: "rgba(255, 255, 255, 0.4)",
+                  opacity: 1,
                 }
               }}
             />
@@ -260,23 +313,23 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackToLogin }
           sx={{
             mt: 2,
             mb: 2,
-            background: "linear-gradient(135deg, #FFC000 0%, #E6A800 100%)",
-            color: "#0a2558",
+            background: "linear-gradient(135deg, #00e676 0%, #00c853 100%)",
+            color: "#050916",
             fontWeight: 800,
             fontSize: "1rem",
             padding: "12px",
-            borderRadius: "8px",
+            borderRadius: "12px",
             textTransform: "none",
-            boxShadow: "0 8px 16px rgba(255, 192, 0, 0.3)",
+            boxShadow: "0 8px 16px rgba(0, 230, 118, 0.2)",
             transition: "all 0.3s ease",
             "&:hover": {
-              background: "linear-gradient(135deg, #FFCE33 0%, #FFC000 100%)",
+              background: "linear-gradient(135deg, #00c853 0%, #00e676 100%)",
               transform: "translateY(-2px)",
-              boxShadow: "0 12px 20px rgba(255, 192, 0, 0.4)",
+              boxShadow: "0 12px 20px rgba(0, 230, 118, 0.4)",
             },
             "&:disabled": {
-              background: "#e2e8f0",
-              color: "#94a3b8"
+              background: "rgba(255, 255, 255, 0.12)",
+              color: "rgba(255, 255, 255, 0.3)"
             }
           }}
         >

@@ -89,8 +89,8 @@ const Login = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        /* Stunning Premium Banking Gradient */
-        background: "linear-gradient(135deg, #0a2558 0%, #153b93 100%)",
+        /* Stunning Premium Banking Dark Gradient */
+        background: "linear-gradient(180deg, #050916 0%, #0f1e36 100%)",
         position: "relative",
         overflow: "hidden",
       }}
@@ -101,11 +101,11 @@ const Login = () => {
           position: "absolute",
           top: "-10%",
           left: "-10%",
-          width: "200px",
-          height: "200px",
-          background: "radial-gradient(circle, rgba(255,192,0,0.2) 0%, rgba(255,192,0,0) 70%)",
+          width: "250px",
+          height: "250px",
+          background: "radial-gradient(circle, rgba(0,230,118,0.12) 0%, rgba(0,230,118,0) 70%)",
           borderRadius: "50%",
-          filter: "blur(40px)",
+          filter: "blur(50px)",
         }}
       />
       <Box
@@ -115,7 +115,7 @@ const Login = () => {
           right: "-5%",
           width: "400px",
           height: "400px",
-          background: "radial-gradient(circle, rgba(16,185,129,0.15) 0%, rgba(16,185,129,0) 70%)",
+          background: "radial-gradient(circle, rgba(0,230,118,0.08) 0%, rgba(0,230,118,0) 70%)",
           borderRadius: "50%",
           filter: "blur(60px)",
         }}
@@ -129,15 +129,15 @@ const Login = () => {
             flexDirection: "column",
             alignItems: "center",
             width: "100%",
-            p: { xs: 2, md: 3 },
-            borderRadius: "16px",
-            background: "rgba(255, 255, 255, 0.98)", // Glassy/clean white feel
-            backdropFilter: "blur(10px)",
+            p: { xs: 3, md: 4 },
+            borderRadius: "28px",
+            background: "rgba(255, 255, 255, 0.04)", // Sleek glassmorphism
+            backdropFilter: "blur(12px)",
             boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
-            border: "1px solid rgba(255,255,255,0.7)",
+            border: "1px solid rgba(255, 255, 255, 0.08)",
           }}
         >
-          <Box sx={{ mb: 1, display: "flex", justifyContent: "center" }}>
+          <Box sx={{ mb: 3, display: "flex", justifyContent: "center" }}>
             <img
               src={BMSLogo}
               alt="BMS Finance & Foundation"
@@ -152,7 +152,7 @@ const Login = () => {
           <Box
             component="form"
             onSubmit={handleSubmit}
-            sx={{ width: "100%", display: "flex", flexDirection: "column", gap: 2 }}
+            sx={{ width: "100%", display: "flex", flexDirection: "column", gap: 2.5 }}
           >
             <TextField
               required
@@ -169,20 +169,35 @@ const Login = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <PersonOutline sx={{ color: "#94a3b8" }} />
+                    <PersonOutline sx={{ color: "rgba(255, 255, 255, 0.5)" }} />
                   </InputAdornment>
                 ),
               }}
               sx={{
                 "& .MuiOutlinedInput-root": {
-                  borderRadius: "8px",
+                  color: "#ffffff",
+                  bgcolor: "rgba(255, 255, 255, 0.02)",
+                  borderRadius: "12px",
+                  "& fieldset": {
+                    borderColor: "rgba(255, 255, 255, 0.12)",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "rgba(255, 255, 255, 0.25)",
+                  },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#0a2558",
+                    borderColor: "#00e676",
                     borderWidth: "2px"
                   },
                 },
+                "& .MuiInputLabel-root": {
+                  color: "rgba(255, 255, 255, 0.6)",
+                },
                 "& .MuiInputLabel-root.Mui-focused": {
-                  color: "#0a2558",
+                  color: "#00e676",
+                },
+                "& .MuiOutlinedInput-input::placeholder": {
+                  color: "rgba(255, 255, 255, 0.4)",
+                  opacity: 1,
                 }
               }}
             />
@@ -202,7 +217,7 @@ const Login = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <LockOutlined sx={{ color: "#94a3b8" }} />
+                    <LockOutlined sx={{ color: "rgba(255, 255, 255, 0.5)" }} />
                   </InputAdornment>
                 ),
                 endAdornment: (
@@ -212,22 +227,38 @@ const Login = () => {
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
+                      sx={{ color: "rgba(255, 255, 255, 0.6)", mr: 0.5 }}
                     >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                      {showPassword ? <VisibilityOff sx={{ color: "rgba(255, 255, 255, 0.6)" }} /> : <Visibility sx={{ color: "rgba(255, 255, 255, 0.6)" }} />}
                     </IconButton>
                   </InputAdornment>
                 )
               }}
               sx={{
                 "& .MuiOutlinedInput-root": {
-                  borderRadius: "8px",
+                  color: "#ffffff",
+                  bgcolor: "rgba(255, 255, 255, 0.02)",
+                  borderRadius: "12px",
+                  "& fieldset": {
+                    borderColor: "rgba(255, 255, 255, 0.12)",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "rgba(255, 255, 255, 0.25)",
+                  },
                   "&.Mui-focused fieldset": {
-                    borderColor: "#0a2558",
+                    borderColor: "#00e676",
                     borderWidth: "2px"
                   },
                 },
+                "& .MuiInputLabel-root": {
+                  color: "rgba(255, 255, 255, 0.6)",
+                },
                 "& .MuiInputLabel-root.Mui-focused": {
-                  color: "#0a2558",
+                  color: "#00e676",
+                },
+                "& .MuiOutlinedInput-input::placeholder": {
+                  color: "rgba(255, 255, 255, 0.4)",
+                  opacity: 1,
                 }
               }}
             />
@@ -237,7 +268,7 @@ const Login = () => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                mt: -1
+                mt: -0.5
               }}
             >
               <FormControlLabel
@@ -246,15 +277,15 @@ const Login = () => {
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
                     sx={{
-                      color: "#94a3b8",
+                      color: "rgba(255, 255, 255, 0.3)",
                       "&.Mui-checked": {
-                        color: "#0a2558",
+                        color: "#00e676",
                       },
                     }}
                   />
                 }
                 label={
-                  <Typography variant="body2" sx={{ color: "#475569", fontWeight: 500 }}>
+                  <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)", fontWeight: 500 }}>
                     Remember me
                   </Typography>
                 }
@@ -264,7 +295,7 @@ const Login = () => {
                 type="button"
                 onClick={() => setIsResetMode(true)}
                 underline="hover"
-                sx={{ color: "#0a2558", fontSize: "0.875rem", fontWeight: 600 }}
+                sx={{ color: "#00e676", fontSize: "0.875rem", fontWeight: 600, "&:hover": { color: "#00c853" } }}
               >
                 Forgot password?
               </MuiLink>
@@ -277,24 +308,24 @@ const Login = () => {
               disabled={isPending}
               sx={{
                 mt: 1,
-                mb: 2,
-                background: "linear-gradient(135deg, #FFC000 0%, #E6A800 100%)",
-                color: "#0a2558",
+                mb: 1,
+                background: "linear-gradient(135deg, #00e676 0%, #00c853 100%)",
+                color: "#050916",
                 fontWeight: 800,
                 fontSize: "1rem",
                 padding: "12px",
-                borderRadius: "8px",
+                borderRadius: "12px",
                 textTransform: "none",
-                boxShadow: "0 8px 16px rgba(255, 192, 0, 0.3)",
+                boxShadow: "0 8px 16px rgba(0, 230, 118, 0.2)",
                 transition: "all 0.3s ease",
                 "&:hover": {
-                  background: "linear-gradient(135deg, #FFCE33 0%, #FFC000 100%)",
+                  background: "linear-gradient(135deg, #00c853 0%, #00e676 100%)",
                   transform: "translateY(-2px)",
-                  boxShadow: "0 12px 20px rgba(255, 192, 0, 0.4)",
+                  boxShadow: "0 12px 20px rgba(0, 230, 118, 0.4)",
                 },
                 "&:disabled": {
-                  background: "#e2e8f0",
-                  color: "#94a3b8"
+                  background: "rgba(255, 255, 255, 0.12)",
+                  color: "rgba(255, 255, 255, 0.3)"
                 }
               }}
             >
@@ -303,13 +334,13 @@ const Login = () => {
 
             <Typography
               variant="body2"
-              sx={{ textAlign: "center", mt: 1, color: "#64748b", fontWeight: 500 }}
+              sx={{ textAlign: "center", mt: 1, color: "rgba(255, 255, 255, 0.5)", fontWeight: 500 }}
             >
               Ready to start your journey?{" "}
               <Link
                 to="/register"
                 style={{
-                  color: "#10b981", // Emerald green for fresh action
+                  color: "#00e676",
                   textDecoration: "none",
                   fontWeight: 700,
                   transition: "color 0.2s ease"
