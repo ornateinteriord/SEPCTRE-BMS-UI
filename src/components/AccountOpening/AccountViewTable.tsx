@@ -177,7 +177,7 @@ const AccountViewTable: React.FC<Props> = ({ accountType, title }) => {
             ? new Date(account.date_of_opening).toLocaleDateString('en-GB')
             : '-',
         amount: account.account_amount
-            ? `₹${account.account_amount.toLocaleString('en-IN')}`
+            ? `$${account.account_amount.toLocaleString('en-US')}`
             : '-',
         interest_rate: account.interest_rate ? `${account.interest_rate}%` : '-',
         duration: account.duration ? `${account.duration} months` : '-',
@@ -439,7 +439,7 @@ const AccountViewTable: React.FC<Props> = ({ accountType, title }) => {
                                             </TableCell>
                                             <TableCell align="right" sx={{ fontWeight: 600, color: '#1e293b' }}>
                                                 {account.account_amount
-                                                    ? `₹${account.account_amount.toLocaleString('en-IN')}`
+                                                    ? `$${account.account_amount.toLocaleString('en-US')}`
                                                     : '-'}
                                             </TableCell>
                                             <TableCell sx={{ color: '#475569' }}>

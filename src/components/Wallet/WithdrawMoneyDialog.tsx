@@ -59,7 +59,7 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
             toast.error('Please enter a valid amount');
             return;
         }
-        if (!isCommission) {
+        /* if (!isCommission) {
             if (!bankAccountNumber.trim()) {
                 toast.error('Please enter bank account number');
                 return;
@@ -72,7 +72,7 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                 toast.error('Please enter account holder name');
                 return;
             }
-        }
+        } */
 
         const selectedAcc = !isCommission ? allAccounts.find((acc: any) => acc._id === selectedAccount) : null;
         if (!isCommission && !selectedAcc) {
@@ -106,9 +106,9 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                     account_no: selectedAcc.account_no,
                     account_type: selectedAcc.account_type,
                     amount: parseFloat(amount),
-                    bank_account_number: bankAccountNumber,
-                    ifsc_code: ifscCode,
-                    account_holder_name: accountHolderName
+                    bank_account_number: bankAccountNumber || 'N/A',
+                    ifsc_code: ifscCode || 'N/A',
+                    account_holder_name: accountHolderName || 'N/A'
                 });
             }
 
@@ -198,7 +198,7 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                                 ) : (
                                     allAccounts.map((account: any) => (
                                         <MenuItem key={account._id} value={account._id}>
-                                            {account.account_group_name} - ₹{account.account_amount.toFixed(2)} ({account.account_no})
+                                            {account.account_group_name} - ${account.account_amount.toFixed(2)} ({account.account_no})
                                         </MenuItem>
                                     ))
                                 )}
@@ -216,7 +216,7 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                                         Available Balance
                                     </Typography>
                                     <Typography variant="h6" sx={{ fontWeight: 700, color: '#6366f1' }}>
-                                        ₹{selectedAccountData.account_amount.toFixed(2)}
+                                        ${selectedAccountData.account_amount.toFixed(2)}
                                     </Typography>
                                 </Box>
                             )}
@@ -234,7 +234,7 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                                 Available Commission Balance
                             </Typography>
                             <Typography variant="h6" sx={{ fontWeight: 700, color: '#6366f1' }}>
-                                ₹{availableBalance.toFixed(2)}
+                                ${availableBalance.toFixed(2)}
                             </Typography>
                         </Box>
                     )}
@@ -259,11 +259,11 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                             error={isCommission ? parseFloat(amount || '0') > availableBalance : (selectedAccountData && parseFloat(amount || '0') > selectedAccountData.account_amount)}
                             helperText={
                                 selectedAccountData && parseFloat(amount || '0') > selectedAccountData.account_amount
-                                    ? `Insufficient balance. Available: ₹${selectedAccountData.account_amount.toFixed(2)}`
+                                    ? `Insufficient balance. Available: $${selectedAccountData.account_amount.toFixed(2)}`
                                     : ''
                             }
                             InputProps={{
-                                startAdornment: <InputAdornment position="start">₹</InputAdornment>,
+                                startAdornment: <InputAdornment position="start">$</InputAdornment>,
                             }}
                             sx={{
                                 '& .MuiOutlinedInput-root': {
@@ -273,7 +273,7 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                         />
                     </Box>
 
-                    {/* Bank Details Section */}
+                    {/* Bank Details Section - Commented out as requested
                     {!isCommission && (
                         <Box>
                             <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 600, color: '#1f2937' }}>
@@ -281,7 +281,6 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                             </Typography>
 
                             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                                {/* Account Holder Name */}
                                 <TextField
                                     fullWidth
                                     label="Account Holder Name"
@@ -295,7 +294,6 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                                     }}
                                 />
 
-                                {/* Bank Account Number */}
                                 <TextField
                                     fullWidth
                                     label="Bank Account Number"
@@ -309,7 +307,6 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                                     }}
                                 />
 
-                                {/* IFSC Code */}
                                 <TextField
                                     fullWidth
                                     label="IFSC Code"
@@ -325,6 +322,7 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                             </Box>
                         </Box>
                     )}
+                    */}
 
                     <Alert severity="info" sx={{ borderRadius: '12px' }}>
                         Withdrawal requests are processed within 2-3 business days.
@@ -354,7 +352,7 @@ const WithdrawMoneyDialog: React.FC<WithdrawMoneyDialogProps> = ({ open, onClose
                 <Button
                     onClick={handleWithdraw}
                     variant="contained"
-                    disabled={withdrawing || (!isCommission && !selectedAccount) || !amount || (!isCommission && (!bankAccountNumber || !ifscCode || !accountHolderName))}
+                    disabled={withdrawing || (!isCommission && !selectedAccount) || !amount}
                     sx={{
                         borderRadius: '12px',
                         textTransform: 'none',

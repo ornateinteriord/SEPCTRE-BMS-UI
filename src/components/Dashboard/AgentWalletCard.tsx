@@ -40,7 +40,7 @@ const AgentWalletCard: React.FC<AgentWalletCardProps> = ({ balance, isLoading = 
                     <CircularProgress size={40} sx={{ color: 'white', my: 2 }} />
                 ) : (
                     <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 2 }}>
-                        {typeof balance === 'number' ? `₹${balance.toFixed(2)}` : balance}
+                        {typeof balance === 'number' ? `$${balance.toFixed(2)}` : balance}
                     </Typography>
                 )}
                 <Typography variant="body2" sx={{ opacity: 0.8, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>

@@ -82,7 +82,7 @@ const CashTransaction: React.FC = () => {
       align: 'right' as const,
       renderCell: (row: CashTx) => (
         <Typography variant="body2" sx={{ fontWeight: 600, color: row.withdrawal > 0 ? '#dc2626' : '#6b7280' }}>
-          {row.withdrawal > 0 ? `₹ ${row.withdrawal.toFixed(2)}` : '-'}
+          {row.withdrawal > 0 ? `$ ${row.withdrawal.toFixed(2)}` : '-'}
         </Typography>
       ),
     },
@@ -93,7 +93,7 @@ const CashTransaction: React.FC = () => {
       align: 'right' as const,
       renderCell: (row: CashTx) => (
         <Typography variant="body2" sx={{ fontWeight: 600, color: row.deposits > 0 ? '#10b981' : '#6b7280' }}>
-          {row.deposits > 0 ? `₹ ${row.deposits.toFixed(2)}` : '-'}
+          {row.deposits > 0 ? `$ ${row.deposits.toFixed(2)}` : '-'}
         </Typography>
       ),
     },
@@ -104,7 +104,7 @@ const CashTransaction: React.FC = () => {
       align: 'right' as const,
       renderCell: (row: CashTx) => (
         <Typography variant="body2" sx={{ fontWeight: 700, color: '#1e293b' }}>
-          ₹ {row.balance.toFixed(2)}
+          $ {row.balance.toFixed(2)}
         </Typography>
       ),
     },
@@ -166,7 +166,7 @@ const CashTransaction: React.FC = () => {
             Opening Balance
           </Typography>
           <Typography variant="h5" sx={{ fontWeight: 700, fontSize: { xs: '1.25rem', sm: '1.5rem' } }}>
-            ₹ {cashTransactionsData?.summary?.openingBalance?.toFixed(2) || '0.00'}
+            $ {cashTransactionsData?.summary?.openingBalance?.toFixed(2) || '0.00'}
           </Typography>
         </Paper>
 
@@ -183,7 +183,7 @@ const CashTransaction: React.FC = () => {
             Debit Amount
           </Typography>
           <Typography variant="h5" sx={{ fontWeight: 700, fontSize: { xs: '1.25rem', sm: '1.5rem' } }}>
-            ₹ {cashTransactionsData?.summary?.debitAmount?.toFixed(2) || '0.00'}
+            $ {cashTransactionsData?.summary?.debitAmount?.toFixed(2) || '0.00'}
           </Typography>
         </Paper>
 
@@ -200,7 +200,7 @@ const CashTransaction: React.FC = () => {
             Credit Amount
           </Typography>
           <Typography variant="h5" sx={{ fontWeight: 700 }}>
-            ₹ {cashTransactionsData?.summary?.creditAmount?.toFixed(2) || '0.00'}
+            $ {cashTransactionsData?.summary?.creditAmount?.toFixed(2) || '0.00'}
           </Typography>
         </Paper>
 
@@ -217,7 +217,7 @@ const CashTransaction: React.FC = () => {
             Closing Balance
           </Typography>
           <Typography variant="h5" sx={{ fontWeight: 700 }}>
-            ₹ {cashTransactionsData?.summary?.closingBalance?.toFixed(2) || '0.00'}
+            $ {cashTransactionsData?.summary?.closingBalance?.toFixed(2) || '0.00'}
           </Typography>
         </Paper>
       </Box>

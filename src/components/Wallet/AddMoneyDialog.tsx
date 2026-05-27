@@ -175,19 +175,19 @@ const AddMoneyDialog: React.FC<AddMoneyDialogProps> = ({ open, onClose }) => {
                             </MenuItem>
                         ) : myAccounts.length === 0 ? (
                             <MenuItem disabled>
-                                No bank account found
+                                No account found
                             </MenuItem>
                         ) : (
                             myAccounts.map((acc: any) => (
                                 <MenuItem key={acc._id} value={acc._id}>
-                                    {acc.account_group_name} - ₹{acc.account_amount.toFixed(2)} ({acc.account_no})
+                                    {acc.account_group_name} - ${acc.account_amount.toFixed(2)} ({acc.account_no})
                                 </MenuItem>
                             ))
                         )}
                     </TextField>
                     {!accountsLoading && myAccounts.length === 0 && (
                         <Typography variant="caption" color="error">
-                            No bank account found for this member
+                            No account found for this member
                         </Typography>
                     )}
 
@@ -199,7 +199,7 @@ const AddMoneyDialog: React.FC<AddMoneyDialogProps> = ({ open, onClose }) => {
                         onChange={(e) => setAmount(e.target.value)}
                         InputProps={{
                             inputProps: { min: 1 },
-                            startAdornment: <InputAdornment position="start">₹</InputAdornment>
+                            startAdornment: <InputAdornment position="start">$</InputAdornment>
                         }}
                     />
                 </Box>

@@ -154,19 +154,19 @@ export default function LoansList() {
     }
 
     if (finalAmount > dueAmount) {
-      toast.error(`Repayment exceeds due amount ₹${dueAmount}`);
+      toast.error(`Repayment exceeds due amount $${dueAmount}`);
       return;
     }
 
     if (finalAmount < 500) {
-      toast.error('Minimum repayment amount is ₹500');
+      toast.error('Minimum repayment amount is $500');
       return;
     }
 
     // Create payment order instead of direct repayment
     createPaymentOrder({
       amount: finalAmount,
-      currency: "INR",
+      currency: "USD",
       customer: {
         customer_id: memberId.toString(),
         customer_email: selectedLoan.email || "",
@@ -417,7 +417,7 @@ export default function LoansList() {
               }}>
                 <Typography sx={{ color: '#64748b' }}>Due Amount</Typography>
                 <Typography sx={{ fontWeight: 700, color: '#dc2626' }}>
-                  ₹{selectedLoan?.net_amount?.toFixed(2)}
+                  ${selectedLoan?.net_amount?.toFixed(2)}
                 </Typography>
               </Box>
             </Box>
@@ -467,7 +467,7 @@ export default function LoansList() {
                       value={amount}
                       sx={{ fontWeight: amount === selectedLoan?.net_amount ? 600 : 400 }}
                     >
-                      ₹{amount} {amount === selectedLoan?.net_amount && '(Full Payment)'}
+                      ${amount} {amount === selectedLoan?.net_amount && '(Full Payment)'}
                     </MenuItem>
                   ))}
               </Select>
@@ -483,7 +483,7 @@ export default function LoansList() {
               disabled={isCreatingOrder}
               placeholder="Enter repayment amount"
               InputProps={{
-                startAdornment: <InputAdornment position="start">₹</InputAdornment>,
+                startAdornment: <InputAdornment position="start">$</InputAdornment>,
               }}
               sx={{
                 borderRadius: 2,
@@ -491,7 +491,7 @@ export default function LoansList() {
                   borderRadius: 2,
                 }
               }}
-              helperText="Minimum amount: ₹500"
+              helperText="Minimum amount: $500"
             />
           </TabPanel>
 
@@ -547,7 +547,7 @@ export default function LoansList() {
               boxShadow: 'none',
             }}
           >
-            {isCreatingOrder ? 'Processing...' : `Pay ₹${getFinalRepayAmount()}`}
+            {isCreatingOrder ? 'Processing...' : `Pay $${getFinalRepayAmount()}`}
           </Button>
         </DialogActions>
       </Dialog>

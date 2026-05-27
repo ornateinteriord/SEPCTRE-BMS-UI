@@ -169,7 +169,7 @@ const DashboardCards = ({ counts, recentData }: DashboardCardsProps) => {
             icon={<SupervisorAccountIcon sx={{ color: 'white' }} />}
             title="Cash Balance"
             status="Active"
-            description={`₹ ${counts.closingBalance || 0}`}
+            description={`$ ${counts.closingBalance || 0}`}
             sx={{
               background: '#667eea',
               borderRadius: '16px',

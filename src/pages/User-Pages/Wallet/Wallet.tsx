@@ -92,7 +92,7 @@ const Wallet = () => {
     }
 
     if (withdrawalAmount < 100) {
-      toast.error('Minimum withdrawal amount is ₹100');
+      toast.error('Minimum withdrawal amount is $100');
       return;
     }
 
@@ -191,7 +191,7 @@ const Wallet = () => {
                       fontWeight: "bold"
                     }}
                   >
-                    ₹{displayBalance.toFixed(2)}
+                    ${displayBalance.toFixed(2)}
                   </Typography>
                   {!isWithdrawalAllowed && (
                     <Typography
@@ -234,7 +234,7 @@ const Wallet = () => {
                     variant="h4"
                     sx={{ color: "#0a2558", mt: 1, fontWeight: "bold" }}
                   >
-                    {walletData?.totalIncome ? `₹${walletData?.totalIncome}` : "₹0.00"}
+                    {walletData?.totalIncome ? `$${walletData?.totalIncome}` : "$0.00"}
                   </Typography>
                 </Box>
               </Grid>
@@ -256,7 +256,7 @@ const Wallet = () => {
                     variant="h4"
                     sx={{ color: "#0a2558", mt: 1, fontWeight: "bold" }}
                   >
-                    {walletData?.totalWithdrawal ? `₹${walletData?.totalWithdrawal}` : "₹0.00"}
+                    {walletData?.totalWithdrawal ? `$${walletData?.totalWithdrawal}` : "$0.00"}
                   </Typography>
                 </Box>
               </Grid>
@@ -297,7 +297,7 @@ const Wallet = () => {
             >
               <TextField
                 label="Available Balance"
-                value={`₹${displayBalance.toFixed(2)}`}
+                value={`$${displayBalance.toFixed(2)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -316,7 +316,7 @@ const Wallet = () => {
                 onChange={handleAmountChange}
                 fullWidth
                 size="medium"
-                placeholder="Enter amount (Min ₹100)"
+                placeholder="Enter amount (Min $100)"
                 disabled={withdrawMutation.isPending || !isWithdrawalAllowed}
                 error={parseFloat(amount) > displayBalance}
                 helperText={parseFloat(amount) > displayBalance ? "Insufficient Balance" : ""}
@@ -331,7 +331,7 @@ const Wallet = () => {
               {/* 
               <TextField
                 label="Admin Charges (15%)"
-                value={`₹${adminCharges.toFixed(2)}`}
+                value={`$${adminCharges.toFixed(2)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -346,7 +346,7 @@ const Wallet = () => {
 
               <TextField
                 label="TDS (5%)"
-                value={`₹${tds.toFixed(2)}`}
+                value={`$${tds.toFixed(2)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -360,7 +360,7 @@ const Wallet = () => {
 
               <TextField
                 label="Net Amount Received"
-                value={`₹${netAmount.toFixed(2)}`}
+                value={`$${netAmount.toFixed(2)}`}
                 fullWidth
                 size="medium"
                 InputProps={{ readOnly: true }}
@@ -388,7 +388,7 @@ const Wallet = () => {
                   <Box sx={{ display: "flex", gap: 4, flexDirection: isMobile ? "column" : "row" }}>
                     <Box>
                       <Typography variant="body2">• 5% TDS applied</Typography>
-                      <Typography variant="body2">• Minimum withdrawal: ₹100</Typography>
+                      <Typography variant="body2">• Minimum withdrawal: $100</Typography>
                       <Typography variant="body2">• One withdrawal per day allowed</Typography>
                     </Box>
                   </Box>

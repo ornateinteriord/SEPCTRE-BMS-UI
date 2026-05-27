@@ -96,6 +96,7 @@ const WithdrawPending = lazy(() => import("./pages/Admin-Pages/WithdrawPending/W
 // const ActivatePackage = lazy(() => import("./pages/Admin-Pages/activatePackage/ActivatePackage"));
 
 const AdminAddOnRequests = lazy(() => import("./pages/Admin-Pages/Packages/AdminAddOnRequests"));
+const AdminLoadFundPage = lazy(() => import("./pages/Admin-Pages/Packages/AdminLoadFundPage"));
 const AdminChat = lazy(() => import("./pages/Admin-Pages/AdminChat/AdminChat"));
 
 // Admin_01 Pages
@@ -152,6 +153,9 @@ const MISPayMaturity = lazy(() => import("./pages/Admin-Pages/Banking/MIS/MISPay
 const UserDashboard = lazy(
   () => import("./pages/User-Pages/UserDashboard/Dashboard")
 );
+const LoadFundPage = lazy(() => import("./pages/User-Pages/UserDashboard/LoadFundPage"));
+const NewSubscription = lazy(() => import("./pages/User-Pages/UserDashboard/NewSubscription"));
+const MySubscriptions = lazy(() => import("./pages/User-Pages/UserDashboard/MySubscriptions"));
 const UserAddOnPackages = lazy(() => import("./pages/User-Pages/Packages/UserAddOnPackages"));
 const UserPackageHistory = lazy(
   () => import("./pages/User-Pages/Packages/PackageHistory")
@@ -190,6 +194,9 @@ const UserDailyPayout = lazy(
 );
 const UserROIBenefits = lazy(
   () => import("./pages/User-Pages/Earnings/ROIBenefits")
+);
+const UserReferralBonus = lazy(
+  () => import("./pages/User-Pages/Earnings/ReferralBonus")
 );
 const UserWallet = lazy(() => import("./pages/User-Pages/Wallet/Wallet"));
 const UserSupportChat = lazy(() => import("./pages/User-Pages/SupportChat/SupportChat"));
@@ -365,6 +372,7 @@ const RoutesProvider = ({
 
               {/* admin addon routes */}
               <Route path="/admin/addon-approvals" element={<AdminAddOnRequests />} />
+              <Route path="/admin/load-fund" element={<AdminLoadFundPage />} />
 
               {/* admin package routes */}
               <Route
@@ -492,6 +500,9 @@ const RoutesProvider = ({
 
             <Route element={<ProtectedRoute allowedRoles={["USER"]} />}>
               <Route path="/user/dashboard" element={<UserDashboard />} />
+              <Route path="/user/load-fund" element={<LoadFundPage />} />
+              <Route path="/user/new-subscription" element={<NewSubscription />} />
+              <Route path="/user/my-subscriptions" element={<MySubscriptions />} />
               {/* user account routes */}
               <Route path="/user/account/profile" element={<UserProfile />} />
               <Route path="/user/account/kyc" element={<UserKYC />} />
@@ -535,6 +546,10 @@ const RoutesProvider = ({
               <Route
                 path="/user/earnings/roi-benefits"
                 element={<UserROIBenefits />}
+              />
+              <Route
+                path="/user/earnings/referral-bonus"
+                element={<UserReferralBonus />}
               />
               <Route path="/user/transactions" element={<UserTransaction />} />
               <Route path="/user/loantransactions" element={<UserLoanTransaction />} />

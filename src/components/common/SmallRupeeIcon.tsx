@@ -11,7 +11,7 @@ const SmallRupeeIcon: React.FC<SmallRupeeIconProps> = ({ sx, className }) => {
     <Box
       component="img"
       src="/B3_1.png"
-      alt="₹"
+      alt="$"
       className={className}
       sx={{
         display: 'inline-block',

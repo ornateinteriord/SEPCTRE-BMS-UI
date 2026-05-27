@@ -203,7 +203,7 @@ const AddOnPackageView = () => {
                         <MenuItem value="" disabled>Select an Add-On</MenuItem>
                         {packages?.map((pkg: any) => (
                           <MenuItem key={pkg.package_id} value={pkg.package_id}>
-                            {pkg.name} (₹{pkg.cost})
+                            {pkg.name} (${pkg.cost})
                           </MenuItem>
                         ))}
                       </Select>

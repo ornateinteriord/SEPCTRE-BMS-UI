@@ -50,7 +50,7 @@ export const getUsedPackageColumns = (user: MemberDetails) => {
     },
     {
       name: "Amount",
-      selector: (row: any) => `₹ ${row.amount.toLocaleString()}`,
+      selector: (row: any) => `$ ${row.amount.toLocaleString()}`,
       sortable: true,
     },
     {
@@ -91,7 +91,7 @@ export const getUnUsedPackageColumns = (user: MemberDetails) => [
   },
   {
     name: "Amount",
-    selector: (row: any) => `₹ ${row.amount.toLocaleString()}`,
+    selector: (row: any) => `$ ${row.amount.toLocaleString()}`,
     sortable: true,
   },
   {
@@ -201,7 +201,7 @@ export const getAdminAggregatedIncomeColumns = () => [
     name: "Total Amount",
     selector: (row: any) => row.totalAmount,
     sortable: true,
-    format: (row: any) => `₹ ${parseFloat(row.totalAmount || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+    format: (row: any) => `$ ${parseFloat(row.totalAmount || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
   },
 ];
 
@@ -218,7 +218,7 @@ export const getDailyPayoutColumns = () => [
   },
   {
     name: "Amount",
-    selector: (row: any) => `₹ ${parseFloat(row.ew_credit || row.amount || 0).toLocaleString()}`,
+    selector: (row: any) => `$ ${parseFloat(row.ew_credit || row.amount || 0).toLocaleString()}`,
     sortable: true,
   },
   {
@@ -255,7 +255,7 @@ export const getTransactionColumns = () => [
     name: "Credit",
     selector: (row: any) => {
       const amt = parseFloat(row.ew_credit || 0) > 0 ? row.ew_credit : row.credit;
-      return amt && parseFloat(amt) > 0 ? `₹ ${parseFloat(amt).toLocaleString('en-IN')}` : "-";
+      return amt && parseFloat(amt) > 0 ? `$ ${parseFloat(amt).toLocaleString('en-US')}` : "-";
     },
     sortable: true,
     style: { color: '#059669', fontWeight: 'bold' }
@@ -264,7 +264,7 @@ export const getTransactionColumns = () => [
     name: "Debit",
     selector: (row: any) => {
       const amt = parseFloat(row.ew_debit || 0) > 0 ? row.ew_debit : row.debit;
-      return amt && parseFloat(amt) > 0 ? `₹ ${parseFloat(amt).toLocaleString('en-IN')}` : "-";
+      return amt && parseFloat(amt) > 0 ? `$ ${parseFloat(amt).toLocaleString('en-US')}` : "-";
     },
     sortable: true,
     style: { color: '#dc2626', fontWeight: 'bold' }
@@ -273,7 +273,7 @@ export const getTransactionColumns = () => [
     name: "Balance",
     selector: (row: any) => {
       const amt = row.balance || row.net_amount || row.previous_balance;
-      return amt ? `₹ ${parseFloat(amt).toLocaleString('en-IN')}` : "-";
+      return amt ? `$ ${parseFloat(amt).toLocaleString('en-US')}` : "-";
     },
     sortable: true,
     style: { fontWeight: 'bold', color: '#1e293b' }
@@ -322,12 +322,12 @@ export const getBankTransactionColumns = () => [
   },
   {
     name: "Credit",
-    selector: (row: any) => row.ew_credit ? `₹ ${parseFloat(row.ew_credit).toLocaleString()}` : "-",
+    selector: (row: any) => row.ew_credit ? `$ ${parseFloat(row.ew_credit).toLocaleString()}` : "-",
     sortable: true,
   },
   {
     name: "Debit",
-    selector: (row: any) => row.ew_debit ? `₹ ${parseFloat(row.ew_debit).toLocaleString()}` : "-",
+    selector: (row: any) => row.ew_debit ? `$ ${parseFloat(row.ew_debit).toLocaleString()}` : "-",
     sortable: true,
   },
   {
@@ -355,12 +355,12 @@ export const getJournalEntriesColumns = () => [
   },
   {
     name: "Debit",
-    selector: (row: any) => `₹ ${parseFloat(row.debit || 0).toLocaleString()}`,
+    selector: (row: any) => `$ ${parseFloat(row.debit || 0).toLocaleString()}`,
     sortable: true,
   },
   {
     name: "Credit",
-    selector: (row: any) => `₹ ${parseFloat(row.credit || 0).toLocaleString()}`,
+    selector: (row: any) => `$ ${parseFloat(row.credit || 0).toLocaleString()}`,
     sortable: true,
   },
 ];
@@ -391,9 +391,9 @@ export const getWalletColumns = () => [
     cell: (row: any) => {
 
       if (parseFloat(row.ew_debit) > 0) {
-        return `-₹${parseFloat(row.ew_debit).toFixed(2)}`;
+        return `-$${parseFloat(row.ew_debit).toFixed(2)}`;
       } else {
-        return `+₹${parseFloat(row.ew_credit).toFixed(2)}`;
+        return `+$${parseFloat(row.ew_credit).toFixed(2)}`;
       }
     }
   },
@@ -423,7 +423,7 @@ export const getAdminDashboardTableColumns: any = () => [
   },
   {
     name: "Package Amount",
-    selector: (row: any) => (row.package_value ? `₹${row.package_value}` : "-"),
+    selector: (row: any) => (row.package_value ? `$${row.package_value}` : "-"),
     center: true,
     sortable: true,
   },
@@ -556,7 +556,7 @@ export const getPermissionsColumns = (
       sortable: true,
       cell: (row: any) => {
         const amt = row.total_package_value ?? row.package_value ?? row.spackage;
-        return amt ? `₹${amt}` : "-";
+        return amt ? `$${amt}` : "-";
       },
     },
     {
@@ -625,7 +625,7 @@ export const getPendingMembersColumns = (
       sortable: true,
       cell: (row: any) => {
         const amt = row.package_value ?? row.spackage;
-        return amt ? `₹${amt}` : "-";
+        return amt ? `$${amt}` : "-";
       },
     },
     {
@@ -1208,7 +1208,7 @@ export const getAdminDailyBenifitsColumns = () => [
     name: "ROI Amount",
     selector: (row: any) => row.ew_credit || row.amount || "0.00",
     sortable: true,
-    format: (row: any) => `₹${parseFloat(row.ew_credit || row.amount || 0).toFixed(2)}`,
+    format: (row: any) => `$${parseFloat(row.ew_credit || row.amount || 0).toFixed(2)}`,
   },
   {
     name: "Status",
@@ -1369,13 +1369,13 @@ export const getWithdrawPendingColumns = (onRepay: (transaction: any) => void) =
     name: 'Paid Amount',
     selector: (row: any) => row.ew_debit || '-',
     sortable: true,
-    cell: (row: any) => row.ew_debit ? `₹${Number(row.net_amount).toLocaleString()}` : '-',
+    cell: (row: any) => row.ew_debit ? `$${Number(row.net_amount).toLocaleString()}` : '-',
   },
   {
     name: 'Deducted',
     selector: (row: any) => row.deduction || 0,
     sortable: true,
-    cell: (row: any) => `₹${Number(row.deduction || 0).toLocaleString()}`,
+    cell: (row: any) => `$${Number(row.deduction || 0).toLocaleString()}`,
   },
   {
     name: 'Status',
@@ -1441,7 +1441,7 @@ export const getProcessedLoansColumns = () => [
   },
   {
     name: "Loan Amount",
-    selector: (row: any) => `₹${parseInt(row.ew_credit || 0).toLocaleString()}` || "-",
+    selector: (row: any) => `$${parseInt(row.ew_credit || 0).toLocaleString()}` || "-",
     sortable: true,
   },
   {
@@ -1462,7 +1462,7 @@ export const getLoansListColumns = (onRepayClick: (row: any) => void) => [
     selector: (row: any) => {
       if (!row.transaction_date) return "-";
       const date = new Date(row.transaction_date);
-      return date.toLocaleDateString("en-IN");
+      return date.toLocaleDateString("en-US");
     },
     sortable: true,
   },
@@ -1484,13 +1484,13 @@ export const getLoansListColumns = (onRepayClick: (row: any) => void) => [
   {
     name: "Loan Amount",
     selector: (row: any) =>
-      `₹${(row.ew_credit || 5000).toLocaleString("en-IN")}`,
+      `$${(row.ew_credit || 5000).toLocaleString("en-US")}`,
     sortable: true,
   },
   {
     name: "Due Amount",
     selector: (row: any) =>
-      `₹${row.net_amount?.toLocaleString("en-IN")}` || "-",
+      `$${row.net_amount?.toLocaleString("en-US")}` || "-",
     sortable: true,
   },
   {

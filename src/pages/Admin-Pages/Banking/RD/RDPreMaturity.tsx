@@ -63,7 +63,7 @@ const RDPreMaturity: React.FC = () => {
             label: 'Amount',
             minWidth: 120,
             align: 'right',
-            renderCell: (row) => `₹${row.account_amount?.toLocaleString('en-IN') || '0'}`,
+            renderCell: (row) => `$${row.account_amount?.toLocaleString('en-US') || '0'}`,
         },
         {
             id: 'interest_rate',
@@ -132,7 +132,7 @@ const RDPreMaturity: React.FC = () => {
     const printData = (allData?.data || []).map(row => ({
         ...row,
         'member_name-print': row.memberDetails?.name || '-',
-        account_amount: `₹${row.account_amount?.toLocaleString('en-IN') || '0'}`,
+        account_amount: `$${row.account_amount?.toLocaleString('en-US') || '0'}`,
         interest_rate: `${row.interest_rate || 0}%`,
         date_of_opening: row.date_of_opening ? new Date(row.date_of_opening).toLocaleDateString('en-GB') : '-',
         date_of_maturity: row.date_of_maturity ? new Date(row.date_of_maturity).toLocaleDateString('en-GB') : '-',

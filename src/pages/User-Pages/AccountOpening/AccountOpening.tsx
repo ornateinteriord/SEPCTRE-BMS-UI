@@ -152,9 +152,9 @@ const UserAccountOpening = () => {
         { header: 'Transaction ID', key: 'transaction_id', width: 20 },
         { header: 'Type', key: 'transaction_type', width: 15 },
         { header: 'Description', key: 'description', width: 40 },
-        { header: 'Credit (₹)', key: 'credit', width: 15 },
-        { header: 'Debit (₹)', key: 'debit', width: 15 },
-        { header: 'Balance (₹)', key: 'balance', width: 15 },
+        { header: 'Credit ($)', key: 'credit', width: 15 },
+        { header: 'Debit ($)', key: 'debit', width: 15 },
+        { header: 'Balance ($)', key: 'balance', width: 15 },
         { header: 'Status', key: 'status', width: 12 },
       ],
       data: transactions.map((tx: any) => ({
@@ -308,7 +308,7 @@ const UserAccountOpening = () => {
                           </Typography>
                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                             <Typography variant="h4" sx={{ fontWeight: 900 }}>
-                              {showBalance ? `₹${Number(existingAccount.account_amount || 0).toLocaleString('en-IN')}` : '••••••••'}
+                              {showBalance ? `$${Number(existingAccount.account_amount || 0).toLocaleString('en-US')}` : '••••••••'}
                             </Typography>
                             <IconButton onClick={() => setShowBalance(!showBalance)} sx={{ color: 'rgba(255,255,255,0.7)' }}>
                               {showBalance ? <VisibilityOffIcon /> : <VisibilityIcon />}
@@ -471,20 +471,20 @@ const UserAccountOpening = () => {
                             .filter(acc => acc.account_no !== existingAccount?.account_no)
                             .map((acc) => (
                                 <MenuItem key={acc._id} value={acc.account_no}>
-                                    {acc.groupName} - {acc.account_no} (Bal: ₹{acc.account_amount?.toLocaleString()})
+                                    {acc.groupName} - {acc.account_no} (Bal: ${acc.account_amount?.toLocaleString()})
                                 </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
 
                 <TextField
-                    label="Amount (₹)"
+                    label="Amount ($)"
                     fullWidth
                     type="number"
                     value={transferAmount}
                     onChange={(e) => setTransferAmount(e.target.value)}
                     InputProps={{
-                        startAdornment: <InputAdornment position="start">₹</InputAdornment>,
+                        startAdornment: <InputAdornment position="start">$</InputAdornment>,
                     }}
                     sx={{ '& .MuiOutlinedInput-root': { borderRadius: '12px' } }}
                 />

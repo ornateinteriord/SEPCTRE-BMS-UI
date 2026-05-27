@@ -148,7 +148,7 @@ const WithdrawPending: React.FC = () => {
                 border: '1px solid #e2e8f0'
               }}>
                 <Typography sx={{ color: '#64748b' }}>Requested Amount</Typography>
-                <Typography sx={{ fontWeight: 600 }}>₹{Number(selectedTx?.net_amount || 0).toFixed(2)}</Typography>
+                <Typography sx={{ fontWeight: 600 }}>${Number(selectedTx?.net_amount || 0).toFixed(2)}</Typography>
               </Box>
 
               <Box sx={{

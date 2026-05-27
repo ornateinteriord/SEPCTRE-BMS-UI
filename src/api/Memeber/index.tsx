@@ -335,7 +335,7 @@ export const useRepayLoan = () => {
 
       const paymentData: CreateOrderRequest = {
         amount,
-        currency: "INR",
+        currency: "USD",
         customer: {
           customer_id: memberId,
           customer_email: memberDetails?.email || "",

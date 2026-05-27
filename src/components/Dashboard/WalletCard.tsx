@@ -50,7 +50,7 @@ const WalletCard: React.FC<WalletCardProps> = ({ balance, onClick, breakdown }) 
                         {breakdown.map((acc, index) => (
                             <Chip
                                 key={index}
-                                label={`${acc.type} - ₹${acc.amount.toFixed(2)}`}
+                                label={`${acc.type} - $${acc.amount.toFixed(2)}`}
                                 sx={{
                                     bgcolor: 'rgba(255,255,255,0.2)',
                                     color: 'white',

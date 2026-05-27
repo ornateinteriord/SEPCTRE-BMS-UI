@@ -169,7 +169,7 @@ const Receipts: React.FC = () => {
       align: 'right' as const,
       renderCell: (row: Receipt) => (
         <Typography variant="body2" sx={{ fontWeight: 700, color: '#059669' }}>
-          ₹{row.amount.toFixed(2)}
+          ${row.amount.toFixed(2)}
         </Typography>
       ),
     },

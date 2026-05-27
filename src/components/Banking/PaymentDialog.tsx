@@ -372,7 +372,7 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({ open, onClose, paymentId 
                                 disabled={!!paymentId}
                                 helperText={paymentId ? "Amount cannot be modified" : ""}
                                 InputProps={{
-                                    startAdornment: <Typography sx={{ mr: 1 }}>₹</Typography>
+                                    startAdornment: <Typography sx={{ mr: 1 }}>$</Typography>
                                 }}
                             />
                         </Grid>

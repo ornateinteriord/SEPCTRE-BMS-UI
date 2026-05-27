@@ -13,17 +13,16 @@ import {
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ShareIcon from '@mui/icons-material/Share';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import ShowChartIcon from '@mui/icons-material/ShowChart';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import GroupsIcon from '@mui/icons-material/Groups';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import HubIcon from '@mui/icons-material/Hub';
-import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import LockIcon from '@mui/icons-material/Lock';
+import PaymentsIcon from '@mui/icons-material/Payments';
 
 import TokenService from '../../../api/token/tokenService';
 import {
@@ -35,6 +34,7 @@ import {
   useGetDailyPayout
 } from '../../../api/Memeber';
 import { toast } from 'react-toastify';
+import ProductsContainer from './ProductsContainer';
 
 
 const UserDashboard = () => {
@@ -102,18 +102,21 @@ const UserDashboard = () => {
       title: "ACCOUNT",
       items: [
         { label: "Profile", icon: <AccountCircleIcon />, route: "/user/account/profile", color: "#3b82f6" },
-        { label: "KYC", icon: <VerifiedUserIcon />, route: "/user/account/kyc", color: "#10b981" },
+        // { label: "KYC", icon: <VerifiedUserIcon />, route: "/user/account/kyc", color: "#10b981" },
         { label: "Password", icon: <LockIcon />, route: "/user/account/change-password", color: "#f59e0b" },
-        ...(isPackageActive ? [{ label: "Add Deposit", icon: <InventoryIcon />, route: "/user/addon-packages?view=addon", color: "#3b82f6" }] : []),
+        // { label: "Load Fund", icon: <InventoryIcon />, onClick: () => navigate("/user/load-fund"), route: "", color: "#3b82f6" },
+        { label: "New Subscription", icon: <InventoryIcon />, onClick: () => navigate("/user/new-subscription"), route: "", color: "#10b981" },
+        { label: "My Subscription", icon: <ReceiptLongIcon />, onClick: () => navigate("/user/my-subscriptions"), route: "", color: "#f59e0b" },
       ]
     },
     {
       title: "BMS BENEFITS",
       items: [
-        { label: "ROI Benefits", icon: <ShowChartIcon />, route: "/user/earnings/roi-benefits", color: "#10b981" },
+        // { label: "ROI Benefits", icon: <ShowChartIcon />, route: "/user/earnings/roi-benefits", color: "#10b981" },
+        { label: "Referral Bonus", icon: <PaymentsIcon />, route: "/user/earnings/referral-bonus", color: "#f59e0b" },
         { label: "Daily ROI", icon: <TrendingUpIcon />, route: "/user/earnings/daily-payout", color: "#ef4444" },
-        { label: "Level Benefits", icon: <AccountTreeIcon />, route: "/user/earnings/level-benefits", color: "#3b82f6" },
-        { label: "Transactions", icon: <ReceiptLongIcon />, route: "/user/transactions", color: "#3b82f6" },
+        { label: "Level Bonus", icon: <AccountTreeIcon />, route: "/user/earnings/level-benefits", color: "#3b82f6" },
+        { label: "Transactions", icon: <AttachMoneyIcon />, route: "/user/transactions", color: "#3b82f6" },
       ]
     },
     {
@@ -209,15 +212,15 @@ const UserDashboard = () => {
       }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
           <Typography sx={{ color: 'rgba(255,255,255,0.7)', fontWeight: 600, fontSize: { xs: '0.85rem', md: '0.95rem' } }}>
-            Your Total Balance
+            Your Top Up Balance
           </Typography>
           <Typography sx={{ fontWeight: 800, fontSize: { xs: '1.85rem', md: '2.5rem' }, color: '#ffffff', lineHeight: 1.1 }}>
-            ₹{Number(walletOverview?.balance || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+            ${Number(walletOverview?.topUpBalance || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
           </Typography>
         </Box>
         <Button
           variant="contained"
-          onClick={() => navigate('/user/addon-packages')}
+          onClick={() => navigate('/user/load-fund')}
           sx={{
             bgcolor: '#00e676', // Vibrant neon green from screenshot
             color: '#050916',   // Dark text matching main dark theme
@@ -236,7 +239,7 @@ const UserDashboard = () => {
             }
           }}
         >
-          Deposit
+          Load Fund
         </Button>
       </Box>
 
@@ -300,19 +303,13 @@ const UserDashboard = () => {
           top: { md: '80px' }
         }}>
           {/* Mobile Only: Quick Access Header */}
-          <Typography variant="h6" sx={{ fontWeight: 900, color: '#0a2558', mb: 1, display: { xs: 'block', md: 'none' } }}>
-            QUICK ACCESS
-          </Typography>
 
           <Box sx={{ flex: 1 }}>
             {quickAccessGroups.map((group, idx) => (
               <Box key={idx} sx={{ mb: 4 }}>
-                <Typography variant="subtitle2" sx={{ fontWeight: 900, color: '#ffffff', mb: 2, letterSpacing: '1px' }}>
-                  {group.title}
-                </Typography>
                 <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 3 }}>
-                  {group.items.map((item, i) => (
-                    <Box key={i} onClick={() => navigate(item.route)} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1.5, cursor: 'pointer' }}>
+                  {group.items.map((item: any, i: number) => (
+                    <Box key={i} onClick={() => item.onClick ? item.onClick() : navigate(item.route)} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1.5, cursor: 'pointer' }}>
                       <Box sx={{
                         width: 56,
                         height: 56,
@@ -337,7 +334,8 @@ const UserDashboard = () => {
                 </Box>
               </Box>
             ))}
-
+            
+            <ProductsContainer />
 
             {/* Team Performance - Mobile Only inside Quick Access */}
             <Box sx={{ mt: 2, display: { xs: 'block', md: 'none' } }}>
@@ -408,11 +406,11 @@ const UserDashboard = () => {
                 <Box sx={{ p: 3, borderRadius: '24px', bgcolor: 'rgba(255,255,255,0.03)', border: '1px dashed rgba(255,255,255,0.15)' }}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
                     <Typography sx={{ fontWeight: 800, color: 'rgba(255,255,255,0.7)' }}>MY Deposit</Typography>
-                    <Typography sx={{ fontWeight: 900, color: '#ffffff' }}>₹{displayDeposit.toLocaleString('en-IN', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}</Typography>
+                    <Typography sx={{ fontWeight: 900, color: '#ffffff' }}>${displayDeposit.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}</Typography>
                   </Box>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Typography sx={{ fontWeight: 800, color: 'rgba(255,255,255,0.7)' }}>Total Withdrawal</Typography>
-                    <Typography sx={{ fontWeight: 900, color: '#ef4444' }}>₹{Number(walletOverview?.totalWithdrawal || 0).toLocaleString('en-IN')}</Typography>
+                    <Typography sx={{ fontWeight: 900, color: '#ef4444' }}>${Number(walletOverview?.totalWithdrawal || 0).toLocaleString('en-US')}</Typography>
                   </Box>
                 </Box>
 
@@ -424,20 +422,20 @@ const UserDashboard = () => {
                   <Stack spacing={2} sx={{ mt: 1 }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                       <Typography variant="body2" sx={{ fontWeight: 800, color: 'rgba(255,255,255,0.7)' }}>Daily ROI</Typography>
-                      <Typography sx={{ fontWeight: 900, color: '#ffb300' }}>₹{totalRoiPaidValue.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
+                      <Typography sx={{ fontWeight: 900, color: '#ffb300' }}>${totalRoiPaidValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                       <Typography variant="body2" sx={{ fontWeight: 800, color: 'rgba(255,255,255,0.7)' }}>BMS ROI Benefits</Typography>
-                      <Typography sx={{ fontWeight: 900, color: '#00e676' }}>₹{roiLevelBenefits.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
+                      <Typography sx={{ fontWeight: 900, color: '#00e676' }}>${roiLevelBenefits.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                       <Typography variant="body2" sx={{ fontWeight: 800, color: 'rgba(255,255,255,0.7)' }}>BMS Level Benefits</Typography>
-                      <Typography sx={{ fontWeight: 900, color: '#00e676' }}>₹{Number(walletOverview?.levelBenefits || 0).toLocaleString('en-IN')}</Typography>
+                      <Typography sx={{ fontWeight: 900, color: '#00e676' }}>${Number(walletOverview?.levelBenefits || 0).toLocaleString('en-US')}</Typography>
                     </Box>
                     {isUserActive && (
                       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Typography variant="body2" sx={{ fontWeight: 800, color: 'rgba(255,255,255,0.7)' }}>BMS - Wallet</Typography>
-                        <Typography sx={{ fontWeight: 900, color: '#29b6f6' }}>₹{displayWallet.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
+                        <Typography sx={{ fontWeight: 900, color: '#29b6f6' }}>${displayWallet.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
                       </Box>
                     )}
                   </Stack>
@@ -450,9 +448,9 @@ const UserDashboard = () => {
                       WALLET BALANCE
                     </Typography>
                     <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, p: 2, px: 4, bgcolor: '#00e676', borderRadius: '20px', color: '#050916' }}>
-                      <CurrencyRupeeIcon sx={{ fontSize: 28, color: '#050916' }} />
+                      <AttachMoneyIcon sx={{ fontSize: 28, color: '#050916' }} />
                       <Typography variant="h4" sx={{ fontWeight: 900 }}>
-                        {Number(walletOverview?.balance || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        {Number(walletOverview?.balance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </Typography>
                     </Box>
                   </Box>

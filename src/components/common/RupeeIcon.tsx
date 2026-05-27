@@ -19,7 +19,7 @@ const RupeeIcon: React.FC<RupeeIconProps> = ({ sx, className }) => {
         ...sx,
       }}
     >
-      ₹
+      $
     </Box>
   );
 };

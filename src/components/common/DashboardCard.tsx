@@ -45,9 +45,9 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
 
   const renderTextWithIcon = (val: string | number, justifyContent: string = 'center') => {
     const valStr = String(val);
-    if (!valStr.includes('₹')) return valStr;
+    if (!valStr.includes('$')) return valStr;
 
-    const parts = valStr.split('₹');
+    const parts = valStr.split('$');
     return (
       <Box sx={{ display: 'inline-flex', alignItems: 'center', justifyContent, gap: 0, flexWrap: 'wrap' }}>
         {parts.map((part, index) => (

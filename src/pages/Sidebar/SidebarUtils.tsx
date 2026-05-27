@@ -20,7 +20,6 @@ import {
   AnnouncementIcon,
   EventIcon,
   SmsIcon,
-  PercentIcon,
 } from "../Icons";
 import { Pending } from "@mui/icons-material";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
@@ -33,13 +32,31 @@ export const UserSideBarMenuItems: SideBarMenuItemType[] = [
     path: "/user/dashboard",
     isExpandable: false,
   },
+  /* {
+    name: "Load Fund",
+    icon: <PaymentsIcon />,
+    path: "/user/load-fund",
+    isExpandable: false,
+  }, */
+  {
+    name: "New Subscription",
+    icon: <PaymentsIcon />,
+    path: "/user/new-subscription",
+    isExpandable: false,
+  },
+  {
+    name: "My Subscription",
+    icon: <ReceiptLongIcon />,
+    path: "/user/my-subscriptions",
+    isExpandable: false,
+  },
   {
     name: "Account Info",
     icon: <AccountCircleIcon />,
     isExpandable: true,
     subItems: [
       { name: "Profile", path: "/user/account/profile", icon: <PersonIcon /> },
-      { name: "KYC", path: "/user/account/kyc", icon: <VerifiedUserIcon /> },
+      // { name: "KYC", path: "/user/account/kyc", icon: <VerifiedUserIcon /> },
       {
         name: "Change Password",
         path: "/user/account/change-password",
@@ -68,7 +85,12 @@ export const UserSideBarMenuItems: SideBarMenuItemType[] = [
     isExpandable: true,
     subItems: [
       {
-        name: "Level Benefits",
+        name: "Referral Bonus",
+        path: "/user/earnings/referral-bonus",
+        icon: <PaymentsIcon />,
+      },
+      {
+        name: "Level Bonus",
         path: "/user/earnings/level-benefits",
         icon: <TrendingUpIcon />,
       },
@@ -77,16 +99,16 @@ export const UserSideBarMenuItems: SideBarMenuItemType[] = [
         path: "/user/earnings/daily-payout",
         icon: <PaymentsIcon />,
       },
-      {
-        name: "ROI Benefits",
-        path: "/user/earnings/roi-benefits",
-        icon: <TrendingUpIcon />,
-      },
+      // {
+      //   name: "ROI Benefits",
+      //   path: "/user/earnings/roi-benefits",
+      //   icon: <TrendingUpIcon />,
+      // },
     ],
   },
   {
     name: "Transactions",
-    icon: <ShowChartIcon />,
+    icon: <MonetizationOnIcon />,
     path: "/user/transactions",
     isExpandable: false,
   },
@@ -141,6 +163,23 @@ export const AdminSideBarMenuItems: SideBarMenuItemType[] = [
     icon: <DashboardIcon />,
     path: "/admin/dashboard",
     isExpandable: false,
+  },
+  {
+    name: "Load Fund",
+    icon: <PaymentsIcon />,
+    isExpandable: true,
+    subItems: [
+      {
+        name: "Configuration",
+        path: "/admin/load-fund",
+        icon: <PaymentsIcon />,
+      },
+      {
+        name: "Requests",
+        path: "/admin/addon-approvals",
+        icon: <ReceiptLongIcon />,
+      },
+    ],
   },
   {
     name: "Members",
@@ -207,31 +246,19 @@ export const AdminSideBarMenuItems: SideBarMenuItemType[] = [
   //     },
   //   ],
 
-  {
-    name: "Add-On Incomes",
-    icon: <PaymentsIcon />,
-    isExpandable: true,
-    subItems: [
-      {
-        name: "Add-On Approvals",
-        path: "/admin/addon-approvals",
-        icon: <ReceiptLongIcon />,
-      },
-    ],
-  },
 
   {
     name: "Incomes",
     icon: <MonetizationOnIcon />,
     isExpandable: true,
     subItems: [
+      // {
+      //   name: "ROI Benefits",
+      //   path: "/admin/income/roi-benefits",
+      //   icon: <TrendingUpIcon />,
+      // },
       {
-        name: "ROI Benefits",
-        path: "/admin/income/roi-benefits",
-        icon: <TrendingUpIcon />,
-      },
-      {
-        name: "Level Benefits",
+        name: "Level Bonus",
         path: "/admin/income/level-benefits",
         icon: <TrendingUpIcon />,
       },
@@ -350,8 +377,8 @@ export const Admin01SideBarMenuItems: SideBarMenuItemType[] = [
     isExpandable: true,
     subItems: [
       { name: "Members", path: "/admin_01/members", icon: <PeopleIcon /> },
-      { name: "Agents", path: "/banking/agents", icon: <PersonIcon /> },
-      { name: "Interests", path: "/banking/interestrate", icon: <PercentIcon /> },
+      // { name: "Agents", path: "/banking/agents", icon: <PersonIcon /> },
+      // { name: "Interests", path: "/banking/interestrate", icon: <PercentIcon /> },
     ],
   },
   {
@@ -360,13 +387,13 @@ export const Admin01SideBarMenuItems: SideBarMenuItemType[] = [
     path: "/admin/withdrawal-requests",
     isExpandable: false,
   },
-  {
+  /* {
     name: "Agent Assignment",
     icon: <LucideIcons.ClipboardCheck />,
     path: "/agentassignemt/agent-assignment",
     isExpandable: false,
-  },
-  {
+  }, */
+  /* {
     name: "Banking",
     icon: <LucideIcons.Landmark />,
     isExpandable: true,
@@ -431,7 +458,7 @@ export const Admin01SideBarMenuItems: SideBarMenuItemType[] = [
       { name: "Pay Maturity", path: "/banking/pigmy-pay-maturity", icon: <PaymentsIcon /> },
       { name: "Calculator", path: "/banking/pigmy-calculator", icon: <LucideIcons.Calculator /> },
     ],
-  },
+  }, */
   /* {
     name: "MIS",
     icon: <ShowChartIcon />,

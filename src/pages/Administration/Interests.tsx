@@ -69,7 +69,7 @@ const Interests: React.FC = () => {
     duration: `${interest.duration || 0} Months`,
     interest_rate_general: `${interest.interest_rate_general || interest.interest_rate || 0}%`,
     interest_rate_senior: `${interest.interest_rate_senior || 0}%`,
-    minimum_deposit: `₹${interest.minimum_deposit}`,
+    minimum_deposit: `$${interest.minimum_deposit}`,
     status: interest.status === 'active' ? 'Active' : 'Inactive',
     interest_type: interest.interest_type || interest.plan_type,
     ref_id: interest.ref_id || '-',

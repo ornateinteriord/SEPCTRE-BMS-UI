@@ -110,7 +110,7 @@ const WithdrawalRequests: React.FC = () => {
                                 {requests.map((req: any) => (
                                     <TableRow key={req._id} hover sx={{ '&:hover': { bgcolor: '#f8fafc' } }}>
                                         <TableCell sx={{ color: '#334155' }}>
-                                            {new Date(req.requested_date).toLocaleDateString('en-IN', {
+                                            {new Date(req.requested_date).toLocaleDateString('en-US', {
                                                 day: '2-digit', month: 'short', year: 'numeric'
                                             })}
                                         </TableCell>
@@ -119,7 +119,7 @@ const WithdrawalRequests: React.FC = () => {
                                         </TableCell>
                                         <TableCell sx={{ color: '#334155', fontWeight: 500 }}>{req.member_id}</TableCell>
                                         <TableCell sx={{ fontWeight: 700, color: '#059669' }}>
-                                            ₹{req.amount?.toFixed(2)}
+                                            ${req.amount?.toFixed(2)}
                                         </TableCell>
                                         <TableCell>
                                             <Chip

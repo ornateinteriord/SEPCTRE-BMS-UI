@@ -113,7 +113,7 @@ const ReceiptsTablePrint = forwardRef<HTMLDivElement, ReceiptsTablePrintProps>((
                         <TableCell sx={{ fontWeight: 700, width: '18%' }}>Received From</TableCell>
                         <TableCell sx={{ fontWeight: 700, width: '23%' }}>Details</TableCell>
                         <TableCell sx={{ fontWeight: 700, width: '15%' }}>Payment Mode</TableCell>
-                        <TableCell sx={{ fontWeight: 700, width: '15%', textAlign: 'right' }}>Amount (₹)</TableCell>
+                        <TableCell sx={{ fontWeight: 700, width: '15%', textAlign: 'right' }}>Amount ($)</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -137,7 +137,7 @@ const ReceiptsTablePrint = forwardRef<HTMLDivElement, ReceiptsTablePrintProps>((
                             Total:
                         </TableCell>
                         <TableCell sx={{ textAlign: 'right', fontWeight: 700, fontSize: '11px' }}>
-                            ₹ {calculateTotal().toFixed(2)}
+                            $ {calculateTotal().toFixed(2)}
                         </TableCell>
                     </TableRow>
                 </TableBody>
@@ -146,7 +146,7 @@ const ReceiptsTablePrint = forwardRef<HTMLDivElement, ReceiptsTablePrintProps>((
             {/* Footer */}
             <Box sx={{ mt: 3, textAlign: 'center' }}>
                 <Typography variant="caption" sx={{ fontSize: '9px', color: '#666' }}>
-                    Total Receipts: {receipts.length} | Total Amount: ₹ {calculateTotal().toFixed(2)}
+                    Total Receipts: {receipts.length} | Total Amount: $ {calculateTotal().toFixed(2)}
                 </Typography>
             </Box>
 

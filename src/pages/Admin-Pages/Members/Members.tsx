@@ -414,9 +414,9 @@ export const PendingMembers = () => {
                 <Typography variant="caption" color="text.secondary">Package Amount</Typography>
                 <Typography variant="body2" fontWeight={600}>
                   {selectedMember?.package_value
-                    ? `₹${selectedMember.package_value}`
+                    ? `$${selectedMember.package_value}`
                     : selectedMember?.spackage
-                      ? `₹${selectedMember.spackage}`
+                      ? `$${selectedMember.spackage}`
                       : '-'}
                 </Typography>
               </Grid>

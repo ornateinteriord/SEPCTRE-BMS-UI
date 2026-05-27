@@ -149,7 +149,7 @@ import Book from "@mui/icons-material/Book";
 import Cancel from "@mui/icons-material/Cancel";
 import Calculate from "@mui/icons-material/Calculate";
 import Visibility from "@mui/icons-material/Visibility";
-import CurrencyRupee from "@mui/icons-material/CurrencyRupee";
+import AttachMoney from "@mui/icons-material/AttachMoney";
 import ListAlt from "@mui/icons-material/ListAlt";
 import AddCircle from "@mui/icons-material/AddCircle";
 import Assessment from "@mui/icons-material/Assessment";
@@ -200,7 +200,7 @@ export const MuiIcons = {
   Cancel,
   Calculate,
   Visibility,
-  CurrencyRupee,
+  AttachMoney,
   ListAlt,
   AddCircle,
   Assessment,

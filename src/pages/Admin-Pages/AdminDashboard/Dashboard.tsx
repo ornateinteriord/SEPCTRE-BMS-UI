@@ -154,9 +154,9 @@ const AdminDashboard = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <DashboardCard
-            amount={`₹${(roiSummary?.totalROIDistributed || 0).toLocaleString()}`}
+            amount={`$${(roiSummary?.totalROIDistributed || 0).toLocaleString()}`}
             title="Total ROI Distributed"
-            subTitle={`Today: ₹${(roiSummary?.todaysTotal || 0).toLocaleString()} (${roiSummary?.todaysCount || 0} payouts)`}
+            subTitle={`Today: $${(roiSummary?.todaysTotal || 0).toLocaleString()} (${roiSummary?.todaysCount || 0} payouts)`}
             IconComponent={PaymentsIcon}
             onClick={() => navigate('/admin/income/daily-payouts')}
           />

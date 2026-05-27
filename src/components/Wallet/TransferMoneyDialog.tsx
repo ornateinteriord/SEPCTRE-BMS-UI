@@ -113,7 +113,7 @@ const TransferMoneyDialog: React.FC<TransferMoneyDialogProps> = ({ open, onClose
 
         // Check balance
         if (fromAccount.account_amount < parseFloat(amount)) {
-            toast.error(`Insufficient balance. Available: ₹${fromAccount.account_amount}`);
+            toast.error(`Insufficient balance. Available: $${fromAccount.account_amount}`);
             return;
         }
 
@@ -201,7 +201,7 @@ const TransferMoneyDialog: React.FC<TransferMoneyDialogProps> = ({ open, onClose
                 >
                     {myAccounts.map((acc: any) => (
                         <MenuItem key={acc._id} value={acc._id}>
-                            {acc.account_group_name} - ₹{acc.account_amount.toFixed(2)} ({acc.account_no})
+                            {acc.account_group_name} - ${acc.account_amount.toFixed(2)} ({acc.account_no})
                         </MenuItem>
                     ))}
                 </TextField>
@@ -209,7 +209,7 @@ const TransferMoneyDialog: React.FC<TransferMoneyDialogProps> = ({ open, onClose
                 {selectedFromAccount && (
                     <Paper sx={{ p: 2, mb: 3, bgcolor: '#f3f4f6', borderRadius: '8px' }}>
                         <Typography variant="body2" color="text.secondary">
-                            Available Balance: <strong>₹{availableBalance.toFixed(2)}</strong>
+                            Available Balance: <strong>${availableBalance.toFixed(2)}</strong>
                         </Typography>
                     </Paper>
                 )}
@@ -329,11 +329,11 @@ const TransferMoneyDialog: React.FC<TransferMoneyDialogProps> = ({ open, onClose
                     error={selectedFrom && parseFloat(amount) > selectedFrom.account_amount}
                     helperText={
                         selectedFrom && parseFloat(amount) > selectedFrom.account_amount
-                            ? `Insufficient balance. Available: ₹${selectedFrom.account_amount.toFixed(2)}`
+                            ? `Insufficient balance. Available: $${selectedFrom.account_amount.toFixed(2)}`
                             : ''
                     }
                     InputProps={{
-                        startAdornment: <Typography sx={{ mr: 1 }}>₹</Typography>
+                        startAdornment: <Typography sx={{ mr: 1 }}>$</Typography>
                     }}
                 />
             </DialogContent>

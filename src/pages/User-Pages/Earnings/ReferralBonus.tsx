@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { DASHBOARD_CUTSOM_STYLE, getLevelBenifitsColumns } from '../../../utils/DataTableColumnsProvider';
 import { useGetTransactionDetails } from '../../../api/Memeber';
 
-const LevelBenifits = () => {
+const ReferralBonus = () => {
   const {
     data: transactionsData,
     isLoading,
@@ -19,60 +19,38 @@ const LevelBenifits = () => {
       ? transactionsData
       : [];
 
-  const levelBenefitsData = transactions
+  const referralBonusData = transactions
     .filter((transaction: any) => {
       if (!transaction || typeof transaction !== 'object') return false;
 
       const txType = transaction.transaction_type?.toLowerCase() || "";
       const benefitType = transaction.benefit_type?.toLowerCase() || "";
+      const descStr = transaction.description?.toLowerCase() || "";
 
-      // Exclude ROI related transactions from this specific page
+      // Exclude ROI related transactions
       if (txType.includes('roi') || benefitType.includes('roi')) return false;
 
-      const levelStr = transaction.description?.toLowerCase() || "";
-      const isLevel1 = transaction.level === 1 || levelStr.includes('1st level') || levelStr.includes('level 1');
-      if (isLevel1) return false;
-
-      const matchesLevel =
-        benefitType.includes('level') ||
-        txType.includes('level') ||
-        txType.includes('commission') ||
-        txType.includes('payout') ||
-        txType.includes('benefit') ||
-        (transaction.level !== null && transaction.level !== undefined);
-
-      return matchesLevel;
+      // Only include level 1 (Direct Referral)
+      const isLevel1 = transaction.level === 1 || descStr.includes('1st level') || descStr.includes('level 1') || descStr.includes('direct') || descStr.includes('referral');
+      
+      return isLevel1;
     })
     .map((transaction: any) => {
-      // Helper for ordinal numbers (1st, 2nd, etc.)
-      const getOrdinal = (n: number) => {
-        const s = ["th", "st", "nd", "rd"];
-        const v = n % 100;
-        return n + (s[(v - 20) % 10] || s[v] || s[0]);
-      };
-
-      const levelStr = transaction.description && transaction.description.toLowerCase().includes('level') 
-          ? transaction.description 
-          : transaction.level 
-            ? `${getOrdinal(transaction.level)} Level Benefit` 
-            : 'N/A';
-
       return {
         id: transaction._id || transaction.transaction_id,
         date: transaction.transaction_date,
-        payoutLevel: levelStr,
+        payoutLevel: 'Referral Bonus', // Forced description as requested
         memberName: transaction.related_member_name || 'N/A',
         memberId: transaction.related_member_id || 'N/A',
         amount: transaction.ew_credit || '0',
-        description: transaction.description,
+        description: 'Referral Bonus', // Forced description as requested
         transactionType: transaction.transaction_type
       };
     });
 
-
   const noDataComponent = (
     <div style={{ padding: '24px' }}>
-      No level bonus data available
+      No referral bonus data available
     </div>
   );
 
@@ -81,7 +59,7 @@ const LevelBenifits = () => {
       <Card sx={{ margin: '2rem', mt: 10 }}>
         <CardContent>
           <div style={{ padding: '24px', textAlign: 'center', color: 'red' }}>
-            Error loading level bonus data: {error?.message}
+            Error loading referral bonus data: {error?.message}
           </div>
         </CardContent>
       </Card>
@@ -100,12 +78,12 @@ const LevelBenifits = () => {
               '& .MuiSvgIcon-root': { color: '#fff' }
             }}
           >
-            List of Level Bonus ({levelBenefitsData.length})
+            List of Referral Bonus ({referralBonusData.length})
           </AccordionSummary>
           <AccordionDetails>
             <DataTable
               columns={getLevelBenifitsColumns()}
-              data={levelBenefitsData}
+              data={referralBonusData}
               pagination
               customStyles={DASHBOARD_CUTSOM_STYLE}
               paginationPerPage={25}
@@ -131,4 +109,4 @@ const LevelBenifits = () => {
   );
 };
 
-export default LevelBenifits;
+export default ReferralBonus;

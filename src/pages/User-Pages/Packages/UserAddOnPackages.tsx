@@ -99,7 +99,7 @@ export const UserAddOnPackages = () => {
                     <TextField
                       {...params}
                       required
-                      label="Amount (₹)"
+                      label="Amount ($)"
                       variant="outlined"
                       size="medium"
                       placeholder="e.g. 10000"
@@ -230,7 +230,7 @@ export const UserAddOnPackages = () => {
                             </Typography>
                           </Box>
                           <Typography variant="h5" sx={{ fontWeight: 900, fontSize: '1.4rem', color: '#0a2558', lineHeight: 1.2 }}>
-                            ₹{pkgAmount.toLocaleString('en-IN')}
+                            ${pkgAmount.toLocaleString('en-US')}
                           </Typography>
                         </Box>
                         <Chip
@@ -247,7 +247,7 @@ export const UserAddOnPackages = () => {
                           {pkg.isFD ? 'Interest Rate' : 'Daily ROI'}
                         </Typography>
                         <Typography variant="h6" sx={{ fontWeight: 800, color: '#1565c0', fontSize: '1.1rem' }}>
-                          {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `₹${pkgDailyROI.toLocaleString('en-IN')}`}
+                          {pkg.isFD ? `${pkg.interest_rate || 0}% p.a.` : `$${pkgDailyROI.toLocaleString('en-US')}`}
                         </Typography>
                       </Box>
 
@@ -313,7 +313,7 @@ export const UserAddOnPackages = () => {
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                           <CalendarTodayIcon sx={{ color: 'text.disabled', fontSize: 14 }} />
                           <Typography variant="caption" sx={{ fontSize: '0.7rem', color: 'text.disabled', fontWeight: 500 }}>
-                            {new Date(pkg.roi_start_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                            {new Date(pkg.roi_start_date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
                           </Typography>
                         </Box>
                         <Typography variant="caption" sx={{ fontSize: '0.7rem', color: 'text.disabled', opacity: 0.6, fontFamily: 'monospace', fontWeight: 500 }}>

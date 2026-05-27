@@ -102,7 +102,7 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
                 });
 
                 if (response && response.success) {
-                    toast.success(`Account closed successfully. Cash payment of ₹${totalPayout.toLocaleString('en-IN')} processed.`);
+                    toast.success(`Account closed successfully. Cash payment of $${totalPayout.toLocaleString('en-US')} processed.`);
                     onSuccess();
                     onClose();
                 } else {
@@ -134,7 +134,7 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
 
             // Check if response is successful
             if (response && response.success) {
-                toast.success(response.message || `Maturity payment of ₹${totalPayout.toLocaleString('en-IN')} processed successfully`);
+                toast.success(response.message || `Maturity payment of $${totalPayout.toLocaleString('en-US')} processed successfully`);
                 onSuccess();
                 onClose();
             } else {
@@ -188,7 +188,7 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
                             <Box sx={{ mt: 2 }}>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                                     <Typography variant="body2">Principal Amount:</Typography>
-                                    <Typography variant="body2" fontWeight={600}>₹{principalAmount.toLocaleString('en-IN')}</Typography>
+                                    <Typography variant="body2" fontWeight={600}>${principalAmount.toLocaleString('en-US')}</Typography>
                                 </Box>
 
                                 {isMatured && interestAmount > 0 && (
@@ -200,7 +200,7 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
                                         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                                             <Typography variant="body2">Interest Earned:</Typography>
                                             <Typography variant="body2" color="success.main" fontWeight={600}>
-                                                + ₹{interestAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+                                                + ${interestAmount.toLocaleString('en-US', { maximumFractionDigits: 2 })}
                                             </Typography>
                                         </Box>
                                     </>
@@ -211,7 +211,7 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <Typography variant="body1" fontWeight={700}>Total Payout:</Typography>
                                     <Typography variant="body1" fontWeight={700} color="primary">
-                                        ₹{totalPayout.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+                                        ${totalPayout.toLocaleString('en-US', { maximumFractionDigits: 2 })}
                                     </Typography>
                                 </Box>
                             </Box>
@@ -273,7 +273,7 @@ const AccountCloseDialog: React.FC<AccountCloseDialogProps> = ({
                     {isLoading ? (
                         <CircularProgress size={20} color="inherit" />
                     ) : hasBalance ? (
-                        `Pay ₹${totalPayout.toLocaleString('en-IN', { maximumFractionDigits: 0 })} & Close`
+                        `Pay $${totalPayout.toLocaleString('en-US', { maximumFractionDigits: 0 })} & Close`
                     ) : (
                         'Close Account'
                     )}

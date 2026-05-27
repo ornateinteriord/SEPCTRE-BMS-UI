@@ -3,11 +3,9 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  TextField,
   Button,
   Card,
   CardContent,
-  InputAdornment,
   Box,
   Typography,
   Grid,
@@ -15,9 +13,7 @@ import {
   IconButton,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import PersonIcon from '@mui/icons-material/Person';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -192,11 +188,6 @@ const KYC: React.FC = () => {
   const uploadRationCardImage = useUploadKYCDocument(user?.Member_id || '', 'rationcard');
   const uploadProfileImage = useUploadKYCDocument(user?.Member_id || '', 'profile');
 
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
   const handleDocumentUpload = async (docType: string, file: File) => {
     setUploadingDoc(docType);
 
@@ -252,8 +243,8 @@ const KYC: React.FC = () => {
     const missingDocs = [];
     if (!documents.panImage) missingDocs.push('PAN Image');
     if (!documents.aadhaarImage) missingDocs.push('Aadhaar Image');
-    if (!documents.checkImage) missingDocs.push('Check Image');
-    if (!documents.passbookImage) missingDocs.push('Passbook Image');
+    // if (!documents.checkImage) missingDocs.push('Check Image');
+    // if (!documents.passbookImage) missingDocs.push('Passbook Image');
     if (!documents.rationCardImage) missingDocs.push('Ration Card Image');
     if (!documents.profileImage) missingDocs.push('Profile Image');
 
@@ -263,10 +254,10 @@ const KYC: React.FC = () => {
     }
 
     // Validate bank details
-    if (!formData.account_number || !formData.ifsc_code || !formData.bank_name) {
+    /* if (!formData.account_number || !formData.ifsc_code || !formData.bank_name) {
       toast.error('Please fill all bank account details');
       return;
-    }
+    } */
 
     submitKYC.mutate({
       ref_no: user.Member_id,
@@ -285,8 +276,8 @@ const KYC: React.FC = () => {
   const documentConfigs = [
     { key: 'panImage', label: 'PAN Card', icon: <BadgeIcon sx={{ color: '#0a2558' }} /> },
     { key: 'aadhaarImage', label: 'Aadhaar Card', icon: <PersonIcon sx={{ color: '#0a2558' }} /> },
-    { key: 'checkImage', label: 'Cancelled Cheque', icon: <AccountBalanceWalletIcon sx={{ color: '#0a2558' }} /> },
-    { key: 'passbookImage', label: 'Bank Passbook', icon: <AccountBalanceIcon sx={{ color: '#0a2558' }} /> },
+    // { key: 'checkImage', label: 'Cancelled Cheque', icon: <AccountBalanceWalletIcon sx={{ color: '#0a2558' }} /> },
+    // { key: 'passbookImage', label: 'Bank Passbook', icon: <AccountBalanceIcon sx={{ color: '#0a2558' }} /> },
     { key: 'rationCardImage', label: 'Ration Card', icon: <ConfirmationNumberIcon sx={{ color: '#0a2558' }} /> },
     { key: 'profileImage', label: 'Profile Photo', icon: <ImageIcon sx={{ color: '#0a2558' }} /> },
   ];
@@ -294,7 +285,7 @@ const KYC: React.FC = () => {
   return (
     <Card sx={{ margin: '2rem', mt: 10, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
       <CardContent>
-        {/* Bank Account Details */}
+        {/* Bank Account Details Commented Out
         <Accordion
           defaultExpanded
           sx={{
@@ -426,6 +417,7 @@ const KYC: React.FC = () => {
             </form>
           </AccordionDetails>
         </Accordion>
+        */}
 
         {/* KYC Documents */}
         <Accordion

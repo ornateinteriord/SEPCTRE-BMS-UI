@@ -56,7 +56,7 @@ const addDays = (ds: string, d: number): string => {
 };
 
 const fmt = (ds: string): string => {
-  try { return new Date(ds).toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }); }
+  try { return new Date(ds).toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' }); }
   catch { return ds || ''; }
 };
 
@@ -332,7 +332,7 @@ th { background: #e0e0e0; font-weight: bold; }
           <td>${data.accountNo}</td>
           <td>${commDate}</td>
           <td>${data.planTerm || 'FD / 365 days'}</td>
-          <td>₹ ${data.planAmount}.0</td>
+          <td>$ ${data.planAmount}.0</td>
           <td>${interestRate.toFixed(1)}</td>
         </tr>
       </table>
@@ -360,7 +360,7 @@ th { background: #e0e0e0; font-weight: bold; }
 
       <!-- MATURITY -->
       <div class="mat-sec">
-        <div><b>Maturity Amount:</b> ₹ ${maturityAmt}.0</div>
+        <div><b>Maturity Amount:</b> $ ${maturityAmt}.0</div>
         <div><b>Maturity Date:</b> ${matDate}</div>
         <div><b>Maturity Amount in Words:</b> ${matWords}</div>
         <div><b>Branch Code:</b> ${data.branchCode || '004'}</div>

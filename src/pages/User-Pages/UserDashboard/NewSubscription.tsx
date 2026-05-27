@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import {
   Card,
   CardContent,
@@ -12,45 +12,29 @@ import {
   MenuItem,
 } from "@mui/material";
 import UserContext from "../../../context/user/userContext";
-import { useUpdateMember } from "../../../api/Memeber";
-import { LoadingComponent } from "../../../App";
+import { useGetWalletOverview } from "../../../api/Memeber";
+import { useRequestAddOnMutation } from "../../../api/Packages";
+import { toast } from "react-toastify";
 
-const Profile: React.FC = () => {
+const NewSubscription: React.FC = () => {
   const { user } = useContext(UserContext);
+  const { data: walletOverview } = useGetWalletOverview(user?.Member_id || '');
+  const { mutate: requestAddOn, isPending: isSubmitting } = useRequestAddOnMutation();
 
   const [formData, setFormData] = useState({
-    Name: "",
-    gender: "",
-    email: "",
-    country: "",
-    usdt_bep20_address: "",
+    package: "",
+    investAmount: "",
   });
 
-  useEffect(() => {
-    if (user) {
-      setFormData({
-        Name: user.Name ?? "",
-        gender: user.gender ?? "Male",
-        email: user.email ?? "",
-        country: user.country ?? "India",
-        usdt_bep20_address: user.usdt_bep20_address ?? "",
-      });
-    }
-  }, [user]);
-
-  const updateMember = useUpdateMember();
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleSelectChange = (e: any) => {
+    const value = e.target.value;
+    setFormData({
+      package: value,
+      investAmount: value, // Auto-fill invest amount based on package selection
+    });
   };
 
-  const handleSelectChange = (e: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -60,7 +44,20 @@ const Profile: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    updateMember.mutate(formData);
+    if (!user?.Member_id || !formData.investAmount) {
+      toast.error("Please provide an investment amount");
+      return;
+    }
+    
+    requestAddOn({
+      member_id: user.Member_id,
+      requested_amount: Number(formData.investAmount),
+      payment_method: 'wallet',
+    }, {
+      onSuccess: () => {
+        setFormData({ package: "", investAmount: "" });
+      }
+    });
   };
 
   const inputStyles = {
@@ -91,9 +88,9 @@ const Profile: React.FC = () => {
 
   return (
     <Box sx={{ p: { xs: 2, md: 4 }, display: 'flex', justifyContent: 'center', background: 'linear-gradient(180deg, #050916 0%, #0f1e36 100%)', minHeight: '100vh' }}>
-      <Card sx={{ maxWidth: 600, width: '100%', bgcolor: 'rgba(255, 255, 255, 0.06)', border: '1px solid rgba(255,255,255,0.08)', boxShadow: "0 15px 35px rgba(0,0,0,0.2)", borderRadius: '28px', color: '#ffffff' }}>
+      <Card sx={{ maxWidth: 600, width: '100%', bgcolor: 'rgba(255, 255, 255, 0.06)', border: '1px solid rgba(255,255,255,0.08)', boxShadow: "0 15px 35px rgba(0,0,0,0.2)", borderRadius: '28px', color: '#ffffff', alignSelf: 'flex-start' }}>
         <CardHeader 
-          title="MEMBER PROFILE" 
+          title="NEW SUBSCRIPTION" 
           sx={{ bgcolor: 'rgba(255,255,255,0.03)', color: '#ffffff', py: 2.5, textAlign: 'center', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
           titleTypographyProps={{ variant: 'subtitle1', fontWeight: 900, letterSpacing: '1px' }}
         />
@@ -101,22 +98,9 @@ const Profile: React.FC = () => {
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
             
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
-              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Name <span style={{color: '#ef4444'}}>*</span></Typography>
+              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Member Id <span style={{color: '#ef4444'}}>*</span></Typography>
               <TextField
-                name="Name"
-                value={formData.Name}
-                onChange={handleInputChange}
-                fullWidth
-                size="small"
-                required
-                sx={inputStyles}
-              />
-            </Box>
-
-            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
-              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Date of Joining</Typography>
-              <TextField
-                value={user?.Date_of_joining ? new Date(user.Date_of_joining).toLocaleDateString('en-GB') : ''}
+                value={user?.Member_id || ''}
                 fullWidth
                 size="small"
                 disabled
@@ -125,11 +109,64 @@ const Profile: React.FC = () => {
             </Box>
 
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
-              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Email Id <span style={{color: '#ef4444'}}>*</span></Typography>
+              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Name <span style={{color: '#ef4444'}}>*</span></Typography>
               <TextField
-                name="email"
-                type="email"
-                value={formData.email}
+                value={user?.Name || ''}
+                fullWidth
+                size="small"
+                disabled
+                sx={{ ...inputStyles, opacity: 0.7 }}
+              />
+            </Box>
+
+            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
+              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Balance <span style={{color: '#ef4444'}}>*</span></Typography>
+              <TextField
+                value={walletOverview?.balance || 0}
+                fullWidth
+                size="small"
+                disabled
+                sx={{ ...inputStyles, opacity: 0.7 }}
+              />
+            </Box>
+
+            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
+              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Package <span style={{color: '#ef4444'}}>*</span></Typography>
+              <FormControl fullWidth size="small">
+                <Select
+                  name="package"
+                  value={formData.package}
+                  onChange={handleSelectChange}
+                  sx={inputStyles}
+                  displayEmpty
+                  MenuProps={{
+                    PaperProps: {
+                      sx: {
+                        bgcolor: '#0f1e36',
+                        color: '#ffffff',
+                        border: '1px solid rgba(255,255,255,0.1)'
+                      }
+                    }
+                  }}
+                >
+                  <MenuItem value="" disabled></MenuItem>
+                  <MenuItem value="1000">1000</MenuItem>
+                  <MenuItem value="2000">2000</MenuItem>
+                  <MenuItem value="5000">5000</MenuItem>
+                  <MenuItem value="10000">10000</MenuItem>
+                  <MenuItem value="25000">25000</MenuItem>
+                  <MenuItem value="50000">50000</MenuItem>
+                  <MenuItem value="100000">100000</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+
+            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
+              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Invest Amount <span style={{color: '#ef4444'}}>*</span></Typography>
+              <TextField
+                name="investAmount"
+                type="number"
+                value={formData.investAmount}
                 onChange={handleInputChange}
                 fullWidth
                 size="small"
@@ -139,66 +176,13 @@ const Profile: React.FC = () => {
             </Box>
 
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
-              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Gender</Typography>
-              <FormControl fullWidth size="small">
-                <Select
-                  name="gender"
-                  value={formData.gender}
-                  onChange={handleSelectChange}
-                  sx={inputStyles}
-                  MenuProps={{
-                    PaperProps: {
-                      sx: {
-                        bgcolor: '#0f1e36',
-                        color: '#ffffff',
-                        border: '1px solid rgba(255,255,255,0.1)'
-                      }
-                    }
-                  }}
-                >
-                  <MenuItem value="Male">Male</MenuItem>
-                  <MenuItem value="Female">Female</MenuItem>
-                  <MenuItem value="Other">Other</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-
-            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
-              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Country</Typography>
-              <FormControl fullWidth size="small">
-                <Select
-                  name="country"
-                  value={formData.country}
-                  onChange={handleSelectChange}
-                  sx={inputStyles}
-                  MenuProps={{
-                    PaperProps: {
-                      sx: {
-                        bgcolor: '#0f1e36',
-                        color: '#ffffff',
-                        border: '1px solid rgba(255,255,255,0.1)'
-                      }
-                    }
-                  }}
-                >
-                  <MenuItem value="India">India</MenuItem>
-                  <MenuItem value="United States">United States</MenuItem>
-                  <MenuItem value="United Kingdom">United Kingdom</MenuItem>
-                  <MenuItem value="Australia">Australia</MenuItem>
-                  <MenuItem value="Canada">Canada</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-
-            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, gap: 1 }}>
-              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>USDT-BEP20 Address</Typography>
+              <Typography sx={{ width: '150px', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontWeight: 600 }}>Topup Date <span style={{color: '#ef4444'}}>*</span></Typography>
               <TextField
-                name="usdt_bep20_address"
-                value={formData.usdt_bep20_address}
-                onChange={handleInputChange}
+                value={new Date().toLocaleDateString('en-GB')}
                 fullWidth
                 size="small"
-                sx={inputStyles}
+                disabled
+                sx={{ ...inputStyles, opacity: 0.7 }}
               />
             </Box>
 
@@ -206,7 +190,7 @@ const Profile: React.FC = () => {
               <Button
                 type="submit"
                 variant="contained"
-                disabled={updateMember.isPending}
+                disabled={isSubmitting}
                 sx={{
                   bgcolor: '#00e676',
                   color: '#050916',
@@ -227,16 +211,14 @@ const Profile: React.FC = () => {
                   }
                 }}
               >
-                Submit (F2)
+                {isSubmitting ? "Submitting..." : "Submit (F2)"}
               </Button>
             </Box>
           </form>
         </CardContent>
-        {updateMember.isPending && <LoadingComponent />}
       </Card>
     </Box>
   );
 };
 
-export default Profile;
-
+export default NewSubscription;

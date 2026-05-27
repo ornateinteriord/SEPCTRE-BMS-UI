@@ -112,7 +112,7 @@ const CashTransactionTablePrint = forwardRef<HTMLDivElement, CashTransactionTabl
                                 Opening Balance
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '13px', fontWeight: 700 }}>
-                                ₹ {summary.openingBalance.toFixed(2)}
+                                $ {summary.openingBalance.toFixed(2)}
                             </Typography>
                         </Box>
                         <Box sx={{ textAlign: 'center' }}>
@@ -120,7 +120,7 @@ const CashTransactionTablePrint = forwardRef<HTMLDivElement, CashTransactionTabl
                                 Debit Amount
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '13px', fontWeight: 700, color: '#dc2626' }}>
-                                ₹ {summary.debitAmount.toFixed(2)}
+                                $ {summary.debitAmount.toFixed(2)}
                             </Typography>
                         </Box>
                         <Box sx={{ textAlign: 'center' }}>
@@ -128,7 +128,7 @@ const CashTransactionTablePrint = forwardRef<HTMLDivElement, CashTransactionTabl
                                 Credit Amount
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '13px', fontWeight: 700, color: '#10b981' }}>
-                                ₹ {summary.creditAmount.toFixed(2)}
+                                $ {summary.creditAmount.toFixed(2)}
                             </Typography>
                         </Box>
                         <Box sx={{ textAlign: 'center' }}>
@@ -136,7 +136,7 @@ const CashTransactionTablePrint = forwardRef<HTMLDivElement, CashTransactionTabl
                                 Closing Balance
                             </Typography>
                             <Typography variant="body2" sx={{ fontSize: '13px', fontWeight: 700 }}>
-                                ₹ {summary.closingBalance.toFixed(2)}
+                                $ {summary.closingBalance.toFixed(2)}
                             </Typography>
                         </Box>
                     </Box>
@@ -160,9 +160,9 @@ const CashTransactionTablePrint = forwardRef<HTMLDivElement, CashTransactionTabl
                             <TableCell sx={{ fontWeight: 700, width: '12%' }}>Date</TableCell>
                             <TableCell sx={{ fontWeight: 700, width: '20%' }}>Details</TableCell>
                             <TableCell sx={{ fontWeight: 700, width: '12%' }}>Ref. No</TableCell>
-                            <TableCell sx={{ fontWeight: 700, width: '13%', textAlign: 'right' }}>Withdrawal (₹)</TableCell>
-                            <TableCell sx={{ fontWeight: 700, width: '13%', textAlign: 'right' }}>Deposits (₹)</TableCell>
-                            <TableCell sx={{ fontWeight: 700, width: '13%', textAlign: 'right' }}>Balance (₹)</TableCell>
+                            <TableCell sx={{ fontWeight: 700, width: '13%', textAlign: 'right' }}>Withdrawal ($)</TableCell>
+                            <TableCell sx={{ fontWeight: 700, width: '13%', textAlign: 'right' }}>Deposits ($)</TableCell>
+                            <TableCell sx={{ fontWeight: 700, width: '13%', textAlign: 'right' }}>Balance ($)</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

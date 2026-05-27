@@ -72,7 +72,7 @@ const PayWithdrawalDialog: React.FC<PayWithdrawalDialogProps> = ({ open, onClose
                 {/* Amount Section */}
                 <Box sx={{ textAlign: 'center', py: 2, mb: 2, bgcolor: '#f0fdf4', borderRadius: 2, border: '1px solid #86efac' }}>
                     <Typography variant="caption" color="text.secondary">Withdrawal Amount</Typography>
-                    <Typography variant="h4" color="success.main" fontWeight="bold">₹{request.amount?.toFixed(2)}</Typography>
+                    <Typography variant="h4" color="success.main" fontWeight="bold">${request.amount?.toFixed(2)}</Typography>
                 </Box>
 
                 {/* Bank Details Section */}

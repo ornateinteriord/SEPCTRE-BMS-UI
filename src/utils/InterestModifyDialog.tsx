@@ -329,7 +329,7 @@ const InterestModifyDialog: React.FC<InterestModifyDialogProps> = ({
                                 onChange={handleChange}
                                 size="small"
                                 InputProps={{
-                                    startAdornment: <InputAdornment position="start">₹</InputAdornment>,
+                                    startAdornment: <InputAdornment position="start">$</InputAdornment>,
                                 }}
                                 inputProps={{ min: "0" }}
                             />

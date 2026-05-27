@@ -20,7 +20,7 @@ interface PaymentComponentProps {
 
 const PaymentComponent: React.FC<PaymentComponentProps> = ({
   amount,
-  currency = "INR",
+  currency = "USD",
   customerId,
   customerEmail,
   customerPhone,

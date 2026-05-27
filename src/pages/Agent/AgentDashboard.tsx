@@ -135,7 +135,7 @@ const AgentDashboard = () => {
                       Today's Collection
                     </Typography>
                     <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                      ₹{isLoading ? '-' : todayCollected.toLocaleString()}
+                      ${isLoading ? '-' : todayCollected.toLocaleString()}
                     </Typography>
                   </Box>
                   <MonetizationOnIcon sx={{ fontSize: 48, opacity: 0.3 }} />
@@ -158,7 +158,7 @@ const AgentDashboard = () => {
                       Total Collected
                     </Typography>
                     <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                      ₹{isLoading ? '-' : totalCollected.toLocaleString()}
+                      ${isLoading ? '-' : totalCollected.toLocaleString()}
                     </Typography>
                   </Box>
                   <AccountBalanceWalletIcon sx={{ fontSize: 48, opacity: 0.3 }} />
@@ -311,16 +311,16 @@ const AgentDashboard = () => {
                 ) : (
                   <>
                     <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 2 }}>
-                      ₹{netCollectedAmount.toFixed(2)}
+                      ${netCollectedAmount.toFixed(2)}
                     </Typography>
                     <Box sx={{ display: 'flex', justifyContent: 'center', gap: 4 }}>
                       <Box>
                         <Typography variant="body2" sx={{ opacity: 0.8 }}>Collected</Typography>
-                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>₹{totalCollected.toFixed(2)}</Typography>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>${totalCollected.toFixed(2)}</Typography>
                       </Box>
                       <Box>
                         <Typography variant="body2" sx={{ opacity: 0.8 }}>Paid</Typography>
-                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>₹{totalPaid.toFixed(2)}</Typography>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>${totalPaid.toFixed(2)}</Typography>
                       </Box>
                     </Box>
                   </>
@@ -412,7 +412,7 @@ const AgentDashboard = () => {
                           minWidth: '80px',
                           textAlign: 'right',
                         }}>
-                          ₹{tx.credit?.toLocaleString()}
+                          ${tx.credit?.toLocaleString()}
                         </Typography>
                       </Box>
                     </Box>

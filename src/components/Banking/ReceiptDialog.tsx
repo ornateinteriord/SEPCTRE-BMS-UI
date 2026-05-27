@@ -379,7 +379,7 @@ const ReceiptDialog: React.FC<ReceiptDialogProps> = ({ open, onClose, receiptId 
                                 disabled={!!receiptId}
                                 helperText={receiptId ? "Amount cannot be modified" : ""}
                                 InputProps={{
-                                    startAdornment: <Typography sx={{ mr: 1 }}>₹</Typography>
+                                    startAdornment: <Typography sx={{ mr: 1 }}>$</Typography>
                                 }}
                             />
                         </Grid>
